@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoltEdge , Smarter Electronics Search</title>
+<meta name="description" content="VoltEdge, a consumer electronics marketplace with instant search and faceted, parametric filtering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e14;
+  --bg2:#0e1420;
+  --panel:#121a28;
+  --panel2:#16202f;
+  --line:#1f2c3e;
+  --blue:#065A82;
+  --teal:#1C7293;
+  --neon:#2ee6d6;
+  --neon-dim:#1fb8ab;
+  --ink:#eaf2fb;
+  --muted:#8ba0ba;
+  --faint:#5f7791;
+  --radius:14px;
+  --shadow:0 20px 50px -25px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.disp{font-family:"Space Grotesk",sans-serif;letter-spacing:-.01em}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input{font-family:inherit}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1280px;margin:0 auto;padding:0 22px}
+
+/* header */
+header{position:sticky;top:0;z-index:40;background:rgba(10,14,20,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:20px;padding:14px 22px;max-width:1280px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:9px;font-family:"Space Grotesk";font-weight:700;font-size:21px;flex-shrink:0}
+.logo .bolt{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--neon),var(--teal));color:#04222a}
+.logo .bolt svg{width:18px;height:18px}
+.logo b{color:var(--neon)}
+.searchbar{flex:1;position:relative;max-width:560px}
+.searchbar svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+.searchbar input{width:100%;padding:12px 14px 12px 42px;background:var(--panel);border:1.5px solid var(--line);border-radius:30px;color:var(--ink);font-size:14.5px;transition:.18s}
+.searchbar input:focus{outline:none;border-color:var(--neon);box-shadow:0 0 0 3px rgba(46,230,214,.13)}
+.searchbar .clr{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;display:none;place-items:center;color:var(--muted)}
+.searchbar .clr.show{display:grid}
+.searchbar .clr:hover{background:var(--line);color:var(--ink)}
+.nav-spacer{margin-left:auto}
+.cart-btn{position:relative;display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--panel);border:1.5px solid var(--line);border-radius:30px;font-weight:600;font-size:14px;transition:.18s}
+.cart-btn:hover{border-color:var(--teal)}
+.cart-btn svg{width:18px;height:18px}
+.cart-count{background:var(--neon);color:#04222a;font-size:11px;font-weight:700;min-width:19px;height:19px;border-radius:10px;display:grid;place-items:center;padding:0 5px}
+.cart-count.hide{display:none}
+.lang-btn{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--panel);border:1.5px solid var(--line);border-radius:30px;font-weight:600;font-size:14px;transition:.18s;flex-shrink:0}
+.lang-btn:hover{border-color:var(--teal)}
+.lang-btn svg{width:16px;height:16px;color:var(--neon)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(80% 120% at 80% -20%,rgba(28,114,147,.35),transparent 60%),radial-gradient(60% 100% at 0% 120%,rgba(46,230,214,.12),transparent 60%)}
+.hero-in{padding:54px 22px 46px;max-width:1280px;margin:0 auto}
+.hero .kick{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--neon);margin-bottom:16px}
+.hero .kick::before{content:"";width:24px;height:1.5px;background:var(--neon)}
+.hero h1{font-size:clamp(32px,5vw,54px);font-weight:700;line-height:1.04;max-width:720px}
+.hero h1 em{font-style:normal;color:var(--neon)}
+.hero p{color:var(--muted);font-size:17px;max-width:560px;margin-top:16px}
+.hero-stats{display:flex;gap:28px;margin-top:26px;flex-wrap:wrap}
+.hero-stats div{display:flex;flex-direction:column}
+.hero-stats .n{font-family:"Space Grotesk";font-size:26px;font-weight:700;color:var(--ink)}
+.hero-stats small{color:var(--faint);font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+
+/* layout */
+.shell{display:grid;grid-template-columns:268px 1fr;gap:26px;padding:34px 0 70px}
+/* facets */
+.facets{position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:6px}
+.facet{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 14px;margin-bottom:14px}
+.facet h3{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--neon);margin-bottom:12px;font-weight:600}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:14px;color:var(--ink);cursor:pointer;user-select:none}
+.opt input{appearance:none;width:18px;height:18px;border:1.6px solid var(--line);border-radius:5px;flex-shrink:0;position:relative;transition:.15s;background:var(--bg2)}
+.opt input:checked{background:var(--neon);border-color:var(--neon)}
+.opt input:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid #04222a;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.opt:hover{color:var(--neon)}
+.opt .cnt{margin-left:auto;color:var(--faint);font-size:12px}
+.range-vals{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:8px;font-family:"Space Grotesk"}
+.range-vals b{color:var(--neon)}
+.dual{position:relative;height:30px}
+.dual input[type=range]{position:absolute;width:100%;pointer-events:none;-webkit-appearance:none;appearance:none;background:none;top:8px;height:4px;margin:0}
+.dual input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;pointer-events:auto;width:18px;height:18px;border-radius:50%;background:var(--neon);border:3px solid var(--bg);cursor:pointer;box-shadow:0 0 0 1px var(--neon)}
+.dual input[type=range]::-moz-range-thumb{pointer-events:auto;width:14px;height:14px;border-radius:50%;background:var(--neon);border:3px solid var(--bg);cursor:pointer}
+.dual .track{position:absolute;top:8px;left:0;right:0;height:4px;background:var(--line);border-radius:3px}
+.dual .fill{position:absolute;top:8px;height:4px;background:var(--neon);border-radius:3px}
+.stars-pick{display:flex;gap:6px;flex-wrap:wrap}
+.rbtn{padding:7px 11px;border:1.5px solid var(--line);border-radius:9px;font-size:13px;color:var(--muted);background:var(--bg2);transition:.15s}
+.rbtn:hover{border-color:var(--teal)}
+.rbtn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* results */
+.results-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.rcount{font-size:15px;color:var(--muted)}
+.rcount b{color:var(--ink);font-family:"Space Grotesk";font-size:18px}
+.sortsel{display:flex;align-items:center;gap:9px}
+.sortsel label{font-size:13px;color:var(--faint)}
+.sortsel select{background:var(--panel);border:1.5px solid var(--line);color:var(--ink);border-radius:9px;padding:9px 12px;font-size:14px}
+.sortsel select:focus{outline:none;border-color:var(--neon)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;min-height:2px}
+.chipx{display:inline-flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line);border-radius:30px;padding:6px 9px 6px 13px;font-size:12.5px;color:var(--ink)}
+.chipx b{color:var(--neon);font-weight:600}
+.chipx button{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;color:var(--muted);font-size:13px}
+.chipx button:hover{background:var(--line);color:var(--ink)}
+.clear-all{font-size:12.5px;color:var(--neon);text-decoration:underline;align-self:center;margin-left:4px}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.2s;animation:fade .35s both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card:hover{transform:translateY(-4px);border-color:var(--teal);box-shadow:var(--shadow)}
+.card .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--bg2)}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover .ph img{transform:scale(1.05)}
+.tagn{position:absolute;top:10px;left:10px;background:var(--neon);color:#04222a;font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:20px;text-transform:uppercase}
+.conn-tag{position:absolute;top:10px;right:10px;background:rgba(10,14,20,.78);backdrop-filter:blur(4px);color:var(--ink);font-size:11px;font-weight:600;padding:4px 9px;border-radius:20px;border:1px solid var(--line)}
+.card .body{padding:14px 15px 16px;display:flex;flex-direction:column;gap:5px;flex:1}
+.brand{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:700}
+.card h3{font-size:16.5px;font-weight:600;line-height:1.2}
+.specs{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.spec{font-size:11px;color:var(--muted);background:var(--bg2);border:1px solid var(--line);padding:3px 8px;border-radius:6px;font-family:"Space Grotesk"}
+.rating{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);margin-top:4px}
+.rating .st{color:var(--neon);letter-spacing:1px}
+.card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px}
+.price{font-family:"Space Grotesk";font-weight:700;font-size:21px}
+.add{display:flex;align-items:center;gap:7px;background:var(--neon);color:#04222a;font-weight:700;font-size:13px;padding:9px 14px;border-radius:9px;transition:.15s}
+.add:hover{background:#fff}
+.add svg{width:15px;height:15px}
+
+.empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted)}
+.empty svg{width:54px;height:54px;color:var(--teal);margin:0 auto 16px}
+.empty h3{font-size:21px;color:var(--ink);margin-bottom:6px}
+.empty button{margin-top:16px;background:var(--teal);color:#fff;padding:11px 20px;border-radius:9px;font-weight:600}
+
+/* footer */
+footer{border-top:1px solid var(--line);background:var(--bg2);padding:44px 0 28px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+footer h4{font-family:"Space Grotesk";font-size:15px;margin-bottom:12px;color:var(--ink)}
+footer a{display:block;color:var(--muted);font-size:14px;padding:4px 0}
+footer a:hover{color:var(--neon)}
+.fbottom{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-size:12.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* mobile facet toggle */
+.facet-toggle{display:none}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(4,8,14,.6);backdrop-filter:blur(2px);opacity:0;visibility:hidden;transition:.3s;z-index:60}
+.scrim.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;height:100%;width:410px;max-width:92vw;background:var(--bg2);border-left:1px solid var(--line);z-index:70;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:1px solid var(--line)}
+.dhead h3{font-size:19px}
+.x{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;font-size:20px;color:var(--muted)}
+.x:hover{background:var(--panel);color:var(--ink)}
+.dbody{flex:1;overflow-y:auto;padding:6px 20px}
+.cline{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid var(--line)}
+.cline .ct{width:66px;height:60px;border-radius:9px;overflow:hidden;background:var(--panel);flex-shrink:0}
+.cline .ct img{width:100%;height:100%;object-fit:cover}
+.cline .cd{flex:1;min-width:0}
+.cline .cd .b{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);font-weight:700}
+.cline .cd h4{font-size:14px;font-weight:600}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;margin-top:7px;overflow:hidden}
+.qty button{width:28px;height:28px;font-size:15px;color:var(--ink);background:var(--panel)}
+.qty button:hover{background:var(--line)}
+.qty span{min-width:30px;text-align:center;font-size:13px;font-weight:600}
+.cline .cr{text-align:right;display:flex;flex-direction:column;justify-content:space-between}
+.cline .cr .p{font-family:"Space Grotesk";font-weight:700}
+.rm{font-size:11.5px;color:var(--faint);text-decoration:underline}
+.rm:hover{color:var(--neon)}
+.empty-cart{text-align:center;color:var(--muted);padding:60px 20px}
+.empty-cart svg{width:48px;height:48px;color:var(--teal);margin:0 auto 14px}
+.dfoot{padding:18px 20px;border-top:1px solid var(--line)}
+.srow{display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:var(--muted)}
+.srow.tot{font-family:"Space Grotesk";font-size:20px;font-weight:700;color:var(--ink);border-top:1px solid var(--line);margin-top:8px;padding-top:12px}
+.checkout-btn{width:100%;background:var(--neon);color:#04222a;font-weight:700;padding:14px;border-radius:10px;margin-top:14px;font-size:15px;transition:.15s}
+.checkout-btn:hover{background:#fff}
+
+/* checkout modal */
+.mscrim{position:fixed;inset:0;background:rgba(4,8,14,.7);backdrop-filter:blur(4px);z-index:80;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:.25s}
+.mscrim.open{opacity:1;visibility:visible}
+.modal{background:var(--bg2);border:1px solid var(--line);border-radius:18px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:scale(.96);transition:.25s;position:relative}
+.mscrim.open .modal{transform:none}
+.modal-in{padding:26px 26px 28px}
+.mclose{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:9px;display:grid;place-items:center;font-size:20px;color:var(--muted)}
+.mclose:hover{background:var(--panel)}
+.steps{display:flex;gap:8px;margin-bottom:22px}
+.step{flex:1;text-align:center}
+.step .d{width:28px;height:28px;border-radius:50%;background:var(--panel);color:var(--muted);display:grid;place-items:center;margin:0 auto 6px;font-weight:700;font-size:12px}
+.step.on .d,.step.done .d{background:var(--neon);color:#04222a}
+.step small{font-size:11px;color:var(--faint)}
+.step.on small{color:var(--ink)}
+.pane{display:none}.pane.show{display:block;animation:fade .3s both}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:12px;font-weight:600;margin-bottom:5px;color:var(--muted)}
+.field input,.field select{width:100%;padding:11px 13px;background:var(--panel);border:1.5px solid var(--line);border-radius:9px;color:var(--ink);font-size:14px}
+.field input:focus,.field select:focus{outline:none;border-color:var(--neon)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.osum{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px;margin-bottom:14px}
+.osum .r{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;color:var(--muted)}
+.osum .r.t{font-family:"Space Grotesk";font-weight:700;font-size:17px;color:var(--ink);border-top:1px solid var(--line);margin-top:7px;padding-top:10px}
+.cnav{display:flex;gap:11px;margin-top:6px}
+.cnav button{flex:1;padding:12px;border-radius:9px;font-weight:600;font-size:14px}
+.bp{background:var(--neon);color:#04222a}.bp:hover{background:#fff}
+.bg{background:var(--panel);border:1px solid var(--line);color:var(--ink)}.bg:hover{border-color:var(--teal)}
+.done{text-align:center;padding:14px 6px}
+.done .ck{width:68px;height:68px;border-radius:50%;background:var(--neon);display:grid;place-items:center;margin:0 auto 16px;animation:pop .4s both}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.done h2{font-size:26px;margin-bottom:6px}
+.done p{color:var(--muted)}
+.oid{font-family:"Space Grotesk";color:var(--neon);font-size:18px;font-weight:700;margin:12px 0}
+
+/* toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(140%);background:var(--panel);border:1px solid var(--teal);color:var(--ink);padding:13px 20px;border-radius:30px;font-size:14px;font-weight:500;z-index:90;transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:9px;box-shadow:var(--shadow)}
+.toast.show{transform:translateX(-50%)}
+.toast svg{width:17px;height:17px;color:var(--neon)}
+
+/* keep numerals/prices in Western digits and LTR even in RTL */
+.num{unicode-bidi:isolate;direction:ltr}
+
+/* ============ RTL OVERRIDES ============ */
+[dir=rtl] body,[dir=rtl] input,[dir=rtl] select,[dir=rtl] button,[dir=rtl] .opt,[dir=rtl] .cline .cd h4{font-family:"Cairo","Inter",sans-serif}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4,[dir=rtl] .disp,[dir=rtl] footer h4{font-family:"Cairo","Space Grotesk",sans-serif}
+[dir=rtl] .logo,[dir=rtl] .price,[dir=rtl] .rcount b,[dir=rtl] .srow.tot,[dir=rtl] .osum .r.t,[dir=rtl] .oid{font-family:"Cairo","Space Grotesk",sans-serif}
+[dir=rtl] .spec,[dir=rtl] .range-vals{font-family:"Cairo","Space Grotesk",sans-serif}
+[dir=rtl] .hero h1,[dir=rtl] .hero p{max-width:none}
+/* search bar: mirror icon + clear button + padding */
+[dir=rtl] .searchbar svg{left:auto;right:14px}
+[dir=rtl] .searchbar input{padding:12px 42px 12px 14px;text-align:right}
+[dir=rtl] .searchbar .clr{right:auto;left:10px}
+/* facet sidebar moves to the other side on desktop */
+[dir=rtl] .opt .cnt{margin-left:0;margin-right:auto}
+[dir=rtl] .opt input:checked::after{left:auto;right:5px}
+[dir=rtl] .kick::before{margin-left:0}
+/* results head + chips */
+[dir=rtl] .clear-all{margin-left:0;margin-right:4px}
+[dir=rtl] .chipx{padding:6px 13px 6px 9px}
+/* cart drawer slides from the left */
+[dir=rtl] .drawer{right:auto;left:0;border-left:none;border-right:1px solid var(--line);transform:translateX(-100%)}
+[dir=rtl] .drawer.open{transform:none}
+[dir=rtl] .cline .cr{text-align:left}
+/* modal close mirrors */
+[dir=rtl] .mclose{right:auto;left:14px}
+/* mobile facet drawer mirrors */
+[dir=rtl] .empty button,[dir=rtl] .step{text-align:center}
+/* keep prices, specs, counts as Western LTR */
+[dir=rtl] .num,[dir=rtl] .price,[dir=rtl] .rcount b,[dir=rtl] .spec,[dir=rtl] .range-vals,[dir=rtl] .oid{unicode-bidi:isolate}
+
+@media(max-width:1000px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .shell{grid-template-columns:1fr}
+  .facets{position:fixed;top:0;left:0;height:100%;width:300px;max-width:88vw;max-height:none;background:var(--bg2);border-right:1px solid var(--line);padding:74px 16px 20px;transform:translateX(-100%);transition:transform .3s;z-index:55;overflow-y:auto}
+  .facets.open{transform:none}
+  [dir=rtl] .facets{left:auto;right:0;border-right:none;border-left:1px solid var(--line);transform:translateX(100%)}
+  [dir=rtl] .facets.open{transform:none}
+  .facet-toggle{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1.5px solid var(--line);border-radius:9px;padding:10px 15px;font-weight:600;font-size:14px}
+  .facet-toggle svg{width:16px;height:16px}
+}
+@media(max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .nav{flex-wrap:wrap;gap:10px}
+  .searchbar{order:3;flex-basis:100%;max-width:none}
+  .searchbar input{padding:13px 14px 13px 42px}
+  [dir=rtl] .searchbar input{padding:13px 42px 13px 14px}
+  .cart-btn,.lang-btn{padding:10px 13px}
+  .cart-btn span:not(.cart-count){display:none}
+  .lang-btn span{font-size:13px}
+  .hero-in{padding:38px 22px 34px}
+  .results-head{gap:10px}
+  .add{padding:10px 14px}
+  .opt{padding:9px 0}
+  .rbtn{padding:9px 13px}
+}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#" class="logo">
+      <span class="bolt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>
+      Volt<b>Edge</b>
+    </a>
+    <div class="searchbar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="search" type="text" autocomplete="off" oninput="onSearch(this.value)">
+      <button class="clr" id="clrSearch" onclick="clearSearch()" aria-label="Clear search">&times;</button>
+    </div>
+    <div class="nav-spacer"></div>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()" aria-label="Switch language">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      <span id="langLabel">العربية</span>
+    </button>
+    <button class="cart-btn" onclick="openCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      <span data-i18n="cart">Cart</span>
+      <span class="cart-count hide" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-in">
+    <span class="kick" data-i18n="heroKick">Search smarter</span>
+    <h1 data-i18n-html="heroTitle">Find the right tech <em>in seconds</em>, not tabs.</h1>
+    <p data-i18n="heroSub">Every product on VoltEdge is indexed by brand, price, rating and the specs that matter. Type, filter and sort your way to the exact device.</p>
+    <div class="hero-stats">
+      <div><span class="n num" id="hsProducts">24</span><small data-i18n="statProducts">Products indexed</small></div>
+      <div><span class="n num" id="hsBrands">12</span><small data-i18n="statBrands">Brands</small></div>
+      <div><span class="n num">12</span><small data-i18n="statCats">Categories</small></div>
+      <div><span class="n num">0ms</span><small data-i18n="statRoundtrips">Server round-trips</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="shell">
+    <!-- FACETS -->
+    <aside class="facets" id="facets">
+      <button class="facet-toggle" style="margin-bottom:14px" onclick="toggleFacets()" data-i18n="closeFilters">Close filters</button>
+      <div class="facet">
+        <h3 data-i18n="facetCategory">Category</h3>
+        <div id="catFacet"></div>
+      </div>
+      <div class="facet">
+        <h3 data-i18n="facetBrand">Brand</h3>
+        <div id="brandFacet"></div>
+      </div>
+      <div class="facet">
+        <h3 data-i18n="facetConnectivity">Connectivity</h3>
+        <div id="connFacet"></div>
+      </div>
+      <div class="facet">
+        <h3 data-i18n="facetPrice">Price</h3>
+        <div class="range-vals"><span class="num">$<b id="pmin">0</b></span><span class="num">$<b id="pmax">0</b></span></div>
+        <div class="dual">
+          <div class="track"></div><div class="fill" id="rfill"></div>
+          <input type="range" id="rlow" oninput="onRange()">
+          <input type="range" id="rhigh" oninput="onRange()">
+        </div>
+      </div>
+      <div class="facet">
+        <h3 data-i18n="facetRating">Minimum rating</h3>
+        <div class="stars-pick" id="ratingFacet"></div>
+      </div>
+    </aside>
+
+    <!-- RESULTS -->
+    <main>
+      <div class="results-head">
+        <div style="display:flex;align-items:center;gap:14px">
+          <button class="facet-toggle" onclick="toggleFacets()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span data-i18n="filters">Filters</span>
+          </button>
+          <div class="rcount"><b class="num" id="rcount">24</b> <span id="rcountLabel" data-i18n="products">products</span></div>
+        </div>
+        <div class="sortsel">
+          <label for="sort" data-i18n="sort">Sort</label>
+          <select id="sort" onchange="render()">
+            <option value="featured" data-i18n="sortFeatured">Featured</option>
+            <option value="price-asc" data-i18n="sortPriceAsc">Price: low to high</option>
+            <option value="price-desc" data-i18n="sortPriceDesc">Price: high to low</option>
+            <option value="rating" data-i18n="sortRating">Top rated</option>
+            <option value="newest" data-i18n="sortNewest">Newest</option>
+          </select>
+        </div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="grid" id="grid"></div>
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="logo" style="margin-bottom:12px">
+          <span class="bolt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>Volt<b>Edge</b>
+        </div>
+        <p style="color:var(--muted);font-size:14px;max-width:300px" data-i18n="footTagline">The electronics marketplace built around search. No noise, just the specs you filter for.</p>
+      </div>
+      <div><h4 data-i18n="footShop">Shop</h4><a href="#" data-i18n="footAudio">Audio</a><a href="#" data-i18n="footComputing">Computing</a><a href="#" data-i18n="footMobile">Mobile</a><a href="#" data-i18n="footAccessories">Accessories</a></div>
+      <div><h4 data-i18n="footSupport">Support</h4><a href="#" data-i18n="footShipping">Shipping</a><a href="#" data-i18n="footReturns">Returns</a><a href="#" data-i18n="footWarranty">Warranty</a><a href="#" data-i18n="footContact">Contact</a></div>
+      <div><h4 data-i18n="footCompany">Company</h4><a href="#" data-i18n="footAbout">About</a><a href="#" data-i18n="footCareers">Careers</a><a href="#" data-i18n="footPress">Press</a><a href="#" data-i18n="footPrivacy">Privacy</a></div>
+    </div>
+    <div class="fbottom">
+      <span data-i18n="footCopy">&copy; 2024 VoltEdge. A demonstration storefront.</span>
+      <span data-i18n="footNote">Instant client-side search and faceted filtering</span>
+    </div>
+  </div>
+</footer>
+
+<!-- cart -->
+<div class="scrim" id="scrim" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer" aria-label="Cart">
+  <div class="dhead"><h3 data-i18n="yourCart">Your cart</h3><button class="x" onclick="closeCart()" aria-label="Close">&times;</button></div>
+  <div class="dbody" id="cartBody"></div>
+  <div class="dfoot" id="cartFoot"></div>
+</aside>
+
+<!-- checkout modal -->
+<div class="mscrim" id="mscrim"><div class="modal" id="modal"></div></div>
+
+<!-- toast -->
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Added</span></div>
+
+<script>
+const IMG = id => "https://images.unsplash.com/photo-"+id+"?w=900&q=80&auto=format&fit=crop";
+const PH = {
+  headphones:IMG("1505740420928-5e560c06d30e"), earbuds:IMG("1572569511254-d8f925fe2cbb"),
+  laptop:IMG("1525547719571-a2d4ac8945e2"), phone:IMG("1592890288564-76628a30a657"),
+  watch:IMG("1579586337278-3befd40fd17a"), speaker:IMG("1608043152269-423dbba4e7e1"),
+  camera:IMG("1516035069371-29a1b244cc32"), keyboard:IMG("1618384887929-16ec33fab9ef"),
+  monitor:IMG("1527443224154-c4a3942d3acf"), drone:IMG("1473968512647-3e447244af8f"),
+  tablet:IMG("1561154464-82e9adf32764"), mouse:IMG("1615663245857-ac93bb7c39e7")
+};
+const AC="#1C7293";
+
+/* Arabic maps for dynamic content */
+const CAT_AR={Headphones:"سماعات رأس",Earbuds:"سماعات أذن",Laptops:"حواسيب محمولة",Phones:"هواتف",Smartwatches:"ساعات ذكية",Speakers:"مكبرات صوت",Cameras:"كاميرات",Keyboards:"لوحات مفاتيح",Monitors:"شاشات",Drones:"طائرات بدون طيار",Tablets:"أجهزة لوحية",Mice:"فأرات"};
+const CONN_AR={"Wireless":"لاسلكي","Bluetooth":"بلوتوث","Wi-Fi":"واي فاي","5G":"الجيل الخامس","USB-C":"يو إس بي-سي"};
+const SPECKEY_AR={Battery:"البطارية",Driver:"مشغل الصوت",Weight:"الوزن",ANC:"عزل الضوضاء",Rated:"التصنيف",RAM:"الذاكرة",Storage:"التخزين",Screen:"الشاشة",Camera:"الكاميرا",GPS:"تحديد الموقع",HR:"معدل النبض",Power:"القدرة",Sensor:"المستشعر",Video:"الفيديو",Switch:"المفاتيح",Layout:"التخطيط",Light:"الإضاءة",Size:"الحجم",Res:"الدقة",Refresh:"التحديث",Flight:"زمن الطيران",Range:"المدى",DPI:"الدقة"};
+const SPECVAL_AR={Active:"نشط",Yes:"نعم",Tactile:"لمسي",Linear:"خطي",White:"أبيض",RGB:"ألوان متعددة"};
+
+let _id=0;
+function P(name,nameAr,brand,cat,price,rating,conn,specs,img){return {id:"v"+(++_id),name,nameAr,brand,cat,price,rating,conn,specs,img,seq:_id};}
+const PRODUCTS=[
+  P("Studio One Wireless","ستوديو ون لاسلكية","Aurex","Headphones",299,4.8,"Wireless",{Battery:"40h",Driver:"40mm",Weight:"290g"},PH.headphones),
+  P("ANC Pro Over-Ear","إيه إن سي برو فوق الأذن","Pulse","Headphones",199,4.5,"Bluetooth",{Battery:"30h",ANC:"Active",Weight:"265g"},PH.headphones),
+  P("Air Buds Pro","إير بودز برو","Volt","Earbuds",179,4.6,"Bluetooth",{Battery:"24h",ANC:"Active",Weight:"5g"},PH.earbuds),
+  P("Mini Buds","ميني بودز","Nimbus","Earbuds",89,4.2,"Bluetooth",{Battery:"18h",Rated:"IPX4",Weight:"4g"},PH.earbuds),
+  P("Helix Pro 14","هيليكس برو 14","Helix","Laptops",1799,4.9,"Wi-Fi",{RAM:"16GB",Storage:"1TB",Weight:"1.4kg"},PH.laptop),
+  P("Orbit Air 13","أوربت آير 13","Orbit","Laptops",1099,4.4,"Wi-Fi",{RAM:"8GB",Storage:"512GB",Weight:"1.1kg"},PH.laptop),
+  P("Volt X5 Pro","فولت إكس 5 برو","Volt","Phones",999,4.7,"5G",{Screen:"6.7in",Storage:"256GB",Camera:"50MP"},PH.phone),
+  P("Nimbus Lite 5G","نيمبوس لايت الجيل الخامس","Nimbus","Phones",499,4.1,"5G",{Screen:"6.4in",Storage:"128GB",Camera:"48MP"},PH.phone),
+  P("Pulse Watch S","بالس ووتش إس","Pulse","Smartwatches",349,4.6,"Bluetooth",{Battery:"36h",GPS:"Yes",Weight:"38g"},PH.watch),
+  P("Kestrel Fit Band","كيستريل فيت باند","Kestrel","Smartwatches",149,4.0,"Bluetooth",{Battery:"7d",HR:"Yes",Weight:"24g"},PH.watch),
+  P("Boom Roller XL","بوم رولر إكس إل","Boom","Speakers",159,4.5,"Bluetooth",{Battery:"20h",Rated:"IP67",Power:"40W"},PH.speaker),
+  P("Lumen Mini Speaker","لومن مكبر صوت صغير","Lumen","Speakers",69,4.3,"Bluetooth",{Battery:"12h",Rated:"IPX5",Power:"10W"},PH.speaker),
+  P("Aperture Z6","أبرتشر زد 6","Aperture","Cameras",1499,4.8,"Wi-Fi",{Sensor:"24MP",Video:"4K",Weight:"650g"},PH.camera),
+  P("Aperture Z30 Vlog","أبرتشر زد 30 فلوغ","Aperture","Cameras",749,4.4,"Wi-Fi",{Sensor:"20MP",Video:"4K",Weight:"410g"},PH.camera),
+  P("Mech 75 Keyboard","ميك 75 لوحة مفاتيح","Helix","Keyboards",159,4.7,"USB-C",{Switch:"Tactile",Layout:"75%",Light:"RGB"},PH.keyboard),
+  P("Wireless Keys TKL","مفاتيح لاسلكية تي كيه إل","Volt","Keyboards",99,4.2,"Wireless",{Switch:"Linear",Layout:"TKL",Light:"White"},PH.keyboard),
+  P("Vista 27 4K","فيستا 27 بدقة 4K","Vista","Monitors",549,4.6,"USB-C",{Size:"27in",Res:"4K",Refresh:"60Hz"},PH.monitor),
+  P("Vista 32 Curved","فيستا 32 منحنية","Vista","Monitors",699,4.5,"USB-C",{Size:"32in",Res:"QHD",Refresh:"165Hz"},PH.monitor),
+  P("SkyFly Pro 4K","سكاي فلاي برو 4K","SkyFly","Drones",899,4.7,"Wi-Fi",{Flight:"34min",Camera:"4K",Range:"10km"},PH.drone),
+  P("SkyFly Mini","سكاي فلاي ميني","SkyFly","Drones",399,4.1,"Wi-Fi",{Flight:"25min",Camera:"2.7K",Range:"4km"},PH.drone),
+  P("Orbit Tab Pro 11","أوربت تاب برو 11","Orbit","Tablets",799,4.6,"Wi-Fi",{Screen:"11in",Storage:"256GB",Weight:"470g"},PH.tablet),
+  P("Nimbus Tab 10","نيمبوس تاب 10","Nimbus","Tablets",329,4.0,"Wi-Fi",{Screen:"10in",Storage:"64GB",Weight:"440g"},PH.tablet),
+  P("Glide Wireless Mouse","جلايد فأرة لاسلكية","Volt","Mice",79,4.5,"Wireless",{DPI:"26K",Battery:"70h",Weight:"63g"},PH.mouse),
+  P("Ergo Mouse","إرجو فأرة","Helix","Mice",59,4.2,"Bluetooth",{DPI:"8K",Battery:"90h",Weight:"99g"},PH.mouse)
+];
+
+/* lang helpers for dynamic content */
+const LANG = () => state.lang;
+const pName = p => LANG()==="ar" ? p.nameAr : p.name;
+const catLabel = c => LANG()==="ar" ? (CAT_AR[c]||c) : c;
+const connLabel = c => LANG()==="ar" ? (CONN_AR[c]||c) : c;
+const specKey = k => LANG()==="ar" ? (SPECKEY_AR[k]||k) : k;
+const specVal = v => LANG()==="ar" ? (SPECVAL_AR[v]||v) : v;
+const NEWEST = new Set(["v1","v7","v13","v19","v23"]); // flagged "new"
+
+const PRICE_LO = Math.min(...PRODUCTS.map(p=>p.price));
+const PRICE_HI = Math.max(...PRODUCTS.map(p=>p.price));
+
+/* ===== i18n dictionary ===== */
+const T = {
+  en:{
+    dir:"ltr", langBtn:"العربية",
+    searchPh:"Search 24 products by name, brand or spec...",
+    cart:"Cart",
+    heroKick:"Search smarter",
+    heroTitle:"Find the right tech <em>in seconds</em>, not tabs.",
+    heroSub:"Every product on VoltEdge is indexed by brand, price, rating and the specs that matter. Type, filter and sort your way to the exact device.",
+    statProducts:"Products indexed", statBrands:"Brands", statCats:"Categories", statRoundtrips:"Server round-trips",
+    closeFilters:"Close filters", filters:"Filters",
+    facetCategory:"Category", facetBrand:"Brand", facetConnectivity:"Connectivity", facetPrice:"Price", facetRating:"Minimum rating",
+    any:"Any",
+    products:"products",
+    sort:"Sort", sortFeatured:"Featured", sortPriceAsc:"Price: low to high", sortPriceDesc:"Price: high to low", sortRating:"Top rated", sortNewest:"Newest",
+    chipSearch:"Search", chipCategory:"Category", chipBrand:"Brand", chipLink:"Link", chipPrice:"Price", chipRating:"Rating", starsWord:"stars",
+    clearAll:"Clear all",
+    emptyTitle:"No products match", emptyBody:"Try removing a filter or widening the price range.", resetFilters:"Reset all filters",
+    newTag:"New", add:"Add",
+    yourCart:"Your cart", emptyCart:"Your cart is empty.", remove:"Remove",
+    subtotal:"Subtotal", shipping:"Shipping", free:"Free", total:"Total", checkout:"Checkout",
+    cartEmptyToast:"Your cart is empty",
+    steps:["Review","Details","Pay","Done"],
+    backToShop:"Back to shop", continue:"Continue", back:"Back", continuePay:"Continue to pay",
+    firstName:"First name", lastName:"Last name", email:"Email", address:"Address", city:"City", country:"Country",
+    phFirst:"Ahmed", phLast:"Sabri", phAddr:"14 Nile Corniche", phCity:"Cairo",
+    cEgypt:"Egypt", cUAE:"United Arab Emirates", cKSA:"Saudi Arabia", cUSA:"United States",
+    cardNumber:"Card number", expiry:"Expiry", cvc:"CVC", amountDue:"Amount due", pay:"Pay",
+    orderPlaced:"Order placed", orderConfirm:"A confirmation is on its way to your inbox.", keepShopping:"Keep shopping",
+    completeDetails:"Please complete your details", validEmail:"Enter a valid email", validCard:"Enter a valid card number", completePayment:"Complete payment details",
+    footTagline:"The electronics marketplace built around search. No noise, just the specs you filter for.",
+    footShop:"Shop", footAudio:"Audio", footComputing:"Computing", footMobile:"Mobile", footAccessories:"Accessories",
+    footSupport:"Support", footShipping:"Shipping", footReturns:"Returns", footWarranty:"Warranty", footContact:"Contact",
+    footCompany:"Company", footAbout:"About", footCareers:"Careers", footPress:"Press", footPrivacy:"Privacy",
+    footCopy:"© 2024 VoltEdge. A demonstration storefront.", footNote:"Instant client-side search and faceted filtering"
+  },
+  ar:{
+    dir:"rtl", langBtn:"English",
+    searchPh:"ابحث في 24 منتجاً بالاسم أو العلامة التجارية أو المواصفات...",
+    cart:"السلة",
+    heroKick:"ابحث بذكاء",
+    heroTitle:"اعثر على الجهاز المناسب <em>في ثوانٍ</em>، لا في عشرات النوافذ.",
+    heroSub:"كل منتج في فولت إيدج مُفهرس حسب العلامة التجارية والسعر والتقييم والمواصفات المهمة. اكتب وصفّ ورتّب وصولاً إلى الجهاز المطلوب بالضبط.",
+    statProducts:"منتجات مفهرسة", statBrands:"علامات تجارية", statCats:"فئات", statRoundtrips:"اتصالات بالخادم",
+    closeFilters:"إغلاق عوامل التصفية", filters:"عوامل التصفية",
+    facetCategory:"الفئة", facetBrand:"العلامة التجارية", facetConnectivity:"الاتصال", facetPrice:"السعر", facetRating:"الحد الأدنى للتقييم",
+    any:"الكل",
+    products:"منتجات",
+    sort:"ترتيب", sortFeatured:"المميزة", sortPriceAsc:"السعر: من الأقل إلى الأعلى", sortPriceDesc:"السعر: من الأعلى إلى الأقل", sortRating:"الأعلى تقييماً", sortNewest:"الأحدث",
+    chipSearch:"بحث", chipCategory:"الفئة", chipBrand:"العلامة التجارية", chipLink:"الاتصال", chipPrice:"السعر", chipRating:"التقييم", starsWord:"نجوم",
+    clearAll:"مسح الكل",
+    emptyTitle:"لا توجد منتجات مطابقة", emptyBody:"حاول إزالة أحد عوامل التصفية أو توسيع نطاق السعر.", resetFilters:"إعادة ضبط كل عوامل التصفية",
+    newTag:"جديد", add:"أضف",
+    yourCart:"سلتك", emptyCart:"سلتك فارغة.", remove:"إزالة",
+    subtotal:"المجموع الفرعي", shipping:"الشحن", free:"مجاني", total:"الإجمالي", checkout:"إتمام الشراء",
+    cartEmptyToast:"سلتك فارغة",
+    steps:["مراجعة","البيانات","الدفع","تم"],
+    backToShop:"العودة للمتجر", continue:"متابعة", back:"رجوع", continuePay:"المتابعة إلى الدفع",
+    firstName:"الاسم الأول", lastName:"اسم العائلة", email:"البريد الإلكتروني", address:"العنوان", city:"المدينة", country:"الدولة",
+    phFirst:"أحمد", phLast:"صبري", phAddr:"14 كورنيش النيل", phCity:"القاهرة",
+    cEgypt:"مصر", cUAE:"الإمارات العربية المتحدة", cKSA:"المملكة العربية السعودية", cUSA:"الولايات المتحدة",
+    cardNumber:"رقم البطاقة", expiry:"تاريخ الانتهاء", cvc:"رمز التحقق", amountDue:"المبلغ المستحق", pay:"ادفع",
+    orderPlaced:"تم تأكيد الطلب", orderConfirm:"رسالة تأكيد في طريقها إلى بريدك الإلكتروني.", keepShopping:"متابعة التسوق",
+    completeDetails:"يرجى إكمال بياناتك", validEmail:"أدخل بريداً إلكترونياً صحيحاً", validCard:"أدخل رقم بطاقة صحيحاً", completePayment:"أكمل بيانات الدفع",
+    footTagline:"متجر الإلكترونيات المبني حول البحث. بلا ضجيج، فقط المواصفات التي تصفّي بها.",
+    footShop:"تسوق", footAudio:"الصوتيات", footComputing:"الحوسبة", footMobile:"المحمول", footAccessories:"الملحقات",
+    footSupport:"الدعم", footShipping:"الشحن", footReturns:"الإرجاع", footWarranty:"الضمان", footContact:"اتصل بنا",
+    footCompany:"الشركة", footAbout:"من نحن", footCareers:"الوظائف", footPress:"الصحافة", footPrivacy:"الخصوصية",
+    footCopy:"© 2024 فولت إيدج. متجر للعرض التوضيحي.", footNote:"بحث فوري من جهة العميل وتصفية متعددة الأوجه"
+  }
+};
+
+/* state */
+const state = {q:"", cats:new Set(), brands:new Set(), conns:new Set(), min:PRICE_LO, max:PRICE_HI, rating:0, lang:"en"};
+let cart = JSON.parse(localStorage.getItem("voltedge_cart")||"[]");
+
+const uniq = key => [...new Set(PRODUCTS.map(p=>p[key]))].sort();
+const fmt = n => "$"+n.toLocaleString();
+
+/* build facets */
+function countFor(predName, val){
+  // count products matching all OTHER active filters, for this facet value
+  return PRODUCTS.filter(p=>matches(p,{except:predName, val, key:predName})).length;
+}
+function buildFacets(){
+  const cf = document.getElementById("catFacet");
+  cf.innerHTML = uniq("cat").map(c=>facetOpt("cats",c,catLabel(c))).join("");
+  document.getElementById("brandFacet").innerHTML = uniq("brand").map(b=>facetOpt("brands",b,b)).join("");
+  document.getElementById("connFacet").innerHTML = uniq("conn").map(c=>facetOpt("conns",c,connLabel(c))).join("");
+  document.getElementById("ratingFacet").innerHTML = [0,3,4,4.5].map(r=>
+    `<button class="rbtn ${state.rating===r?'active':''}" onclick="setRating(${r})">${r===0?(T[state.lang].any):'<span class="num">'+r+'+</span> &#9733;'}</button>`).join("");
+  // price range inputs
+  const lo=document.getElementById("rlow"), hi=document.getElementById("rhigh");
+  lo.min=hi.min=PRICE_LO; lo.max=hi.max=PRICE_HI;
+  lo.value=state.min; hi.value=state.max;
+  updateRangeUI();
+}
+function facetOpt(group,val,label){
+  const checked = state[group].has(val)?"checked":"";
+  return `<label class="opt"><input type="checkbox" ${checked} onchange="toggleFacet('${group}','${String(val).replace(/'/g,"")}')"><span>${label}</span><span class="cnt num" data-${group}="${val}"></span></label>`;
+}
+function refreshCounts(){
+  ["cats","brands","conns"].forEach(group=>{
+    const key = group==="cats"?"cat":group==="brands"?"brand":"conn";
+    document.querySelectorAll(`[data-${group}]`).forEach(el=>{
+      const val = el.getAttribute(`data-${group}`);
+      const n = PRODUCTS.filter(p=>matchesExcept(p,group) && p[key]===val).length;
+      el.textContent = n;
+    });
+  });
+}
+
+/* matching logic: AND across groups, OR within a group */
+function inText(p){
+  if(!state.q) return true;
+  const hay = (p.name+" "+p.nameAr+" "+p.brand+" "+p.cat+" "+catLabel(p.cat)+" "+p.conn+" "+connLabel(p.conn)+" "+Object.values(p.specs).join(" ")).toLowerCase();
+  return state.q.toLowerCase().split(/\s+/).every(t=>hay.includes(t));
+}
+function matchesExcept(p, skipGroup){
+  // apply all filters except the named group (for facet counts)
+  if(!inText(p)) return false;
+  if(skipGroup!=="cats" && state.cats.size && !state.cats.has(p.cat)) return false;
+  if(skipGroup!=="brands" && state.brands.size && !state.brands.has(p.brand)) return false;
+  if(skipGroup!=="conns" && state.conns.size && !state.conns.has(p.conn)) return false;
+  if(p.price<state.min || p.price>state.max) return false;
+  if(p.rating<state.rating) return false;
+  return true;
+}
+function matches(p){
+  if(!inText(p)) return false;
+  if(state.cats.size && !state.cats.has(p.cat)) return false;
+  if(state.brands.size && !state.brands.has(p.brand)) return false;
+  if(state.conns.size && !state.conns.has(p.conn)) return false;
+  if(p.price<state.min || p.price>state.max) return false;
+  if(p.rating<state.rating) return false;
+  return true;
+}
+
+/* events */
+function onSearch(v){state.q=v;document.getElementById("clrSearch").classList.toggle("show",!!v);render();}
+function clearSearch(){state.q="";document.getElementById("search").value="";document.getElementById("clrSearch").classList.remove("show");render();}
+function toggleFacet(group,val){
+  // match real value (in case of stripped quotes, values have none here)
+  if(state[group].has(val)) state[group].delete(val); else state[group].add(val);
+  render();
+}
+function setRating(r){state.rating = state.rating===r?0:r; render();}
+function onRange(){
+  let lo=+document.getElementById("rlow").value, hi=+document.getElementById("rhigh").value;
+  if(lo>hi){ [lo,hi]=[hi,lo]; }
+  state.min=lo; state.max=hi;
+  updateRangeUI(); render(false);
+}
+function updateRangeUI(){
+  document.getElementById("pmin").textContent = state.min.toLocaleString();
+  document.getElementById("pmax").textContent = state.max.toLocaleString();
+  const span = PRICE_HI-PRICE_LO;
+  const l = (state.min-PRICE_LO)/span*100, r=(state.max-PRICE_LO)/span*100;
+  const fill=document.getElementById("rfill");
+  fill.style.left=l+"%"; fill.style.width=(r-l)+"%";
+}
+function clearAll(){
+  state.q="";state.cats.clear();state.brands.clear();state.conns.clear();
+  state.min=PRICE_LO;state.max=PRICE_HI;state.rating=0;
+  document.getElementById("search").value="";
+  document.getElementById("clrSearch").classList.remove("show");
+  buildFacets();render();
+}
+
+/* chips */
+function buildChips(){
+  const t=T[state.lang];
+  const c=[];
+  if(state.q) c.push(chip(t.chipSearch,"\""+state.q+"\"","clearSearch()"));
+  state.cats.forEach(v=>c.push(chip(t.chipCategory,catLabel(v),`toggleFacet('cats','${v}')`)));
+  state.brands.forEach(v=>c.push(chip(t.chipBrand,v,`toggleFacet('brands','${v}')`)));
+  state.conns.forEach(v=>c.push(chip(t.chipLink,connLabel(v),`toggleFacet('conns','${v}')`)));
+  if(state.min>PRICE_LO||state.max<PRICE_HI) c.push(chip(t.chipPrice,'<span class="num">'+fmt(state.min)+" - "+fmt(state.max)+'</span>',"resetPrice()"));
+  if(state.rating>0) c.push(chip(t.chipRating,'<span class="num">'+state.rating+"+</span> "+t.starsWord,`setRating(${state.rating})`));
+  const el=document.getElementById("chips");
+  if(c.length===0){el.innerHTML="";return;}
+  el.innerHTML = c.join("") + `<button class="clear-all" onclick="clearAll()">${t.clearAll}</button>`;
+}
+function chip(label,val,onclk){return `<span class="chipx"><b>${label}:</b> ${val}<button onclick="${onclk}" aria-label="Remove">&times;</button></span>`;}
+function resetPrice(){state.min=PRICE_LO;state.max=PRICE_HI;document.getElementById("rlow").value=PRICE_LO;document.getElementById("rhigh").value=PRICE_HI;updateRangeUI();render();}
+
+/* render */
+function sortList(list){
+  const s=document.getElementById("sort").value;
+  const a=[...list];
+  if(s==="price-asc")a.sort((x,y)=>x.price-y.price);
+  else if(s==="price-desc")a.sort((x,y)=>y.price-x.price);
+  else if(s==="rating")a.sort((x,y)=>y.rating-x.rating);
+  else if(s==="newest")a.sort((x,y)=>(NEWEST.has(y.id)-NEWEST.has(x.id))|| y.seq-x.seq);
+  return a;
+}
+function render(rebuildCounts=true){
+  const t=T[state.lang];
+  const list = sortList(PRODUCTS.filter(matches));
+  document.getElementById("rcount").textContent = list.length;
+  document.getElementById("rcountLabel").textContent = t.products;
+  buildChips();
+  if(rebuildCounts) refreshCounts();
+  const grid=document.getElementById("grid");
+  if(list.length===0){
+    grid.innerHTML = `<div class="empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+      <h3>${t.emptyTitle}</h3><p>${t.emptyBody}</p>
+      <button onclick="clearAll()">${t.resetFilters}</button></div>`;
+    return;
+  }
+  grid.innerHTML = list.map((p,i)=>`
+    <article class="card" style="animation-delay:${Math.min(i,8)*0.03}s">
+      <div class="ph">
+        ${NEWEST.has(p.id)?`<span class="tagn">${t.newTag}</span>`:''}
+        <span class="conn-tag">${connLabel(p.conn)}</span>
+        <img src="${p.img}" alt="${pName(p)}" loading="lazy" referrerpolicy="no-referrer" style="background:${AC}" onerror="this.style.background='${AC}';this.removeAttribute('src')">
+      </div>
+      <div class="body">
+        <span class="brand">${p.brand} &middot; ${catLabel(p.cat)}</span>
+        <h3>${pName(p)}</h3>
+        <div class="specs">${Object.entries(p.specs).map(([k,v])=>`<span class="spec">${specKey(k)}: <span class="num">${specVal(v)}</span></span>`).join("")}</div>
+        <div class="rating"><span class="st">${"&#9733;".repeat(Math.round(p.rating))}</span> <span class="num">${p.rating.toFixed(1)}</span></div>
+        <div class="foot">
+          <span class="price">${fmt(p.price)}</span>
+          <button class="add" onclick="addToCart('${p.id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>${t.add}
+          </button>
+        </div>
+      </div>
+    </article>`).join("");
+}
+
+/* cart */
+function addToCart(id){
+  const ex=cart.find(c=>c.id===id);
+  if(ex)ex.qty++; else cart.push({id,qty:1});
+  persist();
+  const pr=PRODUCTS.find(p=>p.id===id);
+  toast(state.lang==="ar" ? ("تمت إضافة "+pName(pr)+" إلى السلة") : (pName(pr)+" added to cart"));
+  const el=document.getElementById("cartCount");el.style.transform="scale(1.4)";setTimeout(()=>el.style.transform="",180);
+}
+function persist(){localStorage.setItem("voltedge_cart",JSON.stringify(cart));renderCart();updateCount();}
+function updateCount(){const n=cart.reduce((s,c)=>s+c.qty,0);const el=document.getElementById("cartCount");el.textContent=n;el.classList.toggle("hide",n===0);}
+function changeQty(id,d){const c=cart.find(x=>x.id===id);if(!c)return;c.qty+=d;if(c.qty<=0)cart=cart.filter(x=>x.id!==id);persist();}
+function removeLine(id){cart=cart.filter(x=>x.id!==id);persist();}
+function cartTotal(){return cart.reduce((s,c)=>s+PRODUCTS.find(p=>p.id===c.id).price*c.qty,0);}
+function renderCart(){
+  const L=T[state.lang];
+  const body=document.getElementById("cartBody"), foot=document.getElementById("cartFoot");
+  if(cart.length===0){
+    body.innerHTML=`<div class="empty-cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><p>${L.emptyCart}</p></div>`;
+    foot.innerHTML=""; return;
+  }
+  body.innerHTML = cart.map(c=>{const p=PRODUCTS.find(x=>x.id===c.id);return `
+    <div class="cline">
+      <div class="ct"><img src="${p.img}" alt="" referrerpolicy="no-referrer" style="background:${AC}" onerror="this.style.background='${AC}';this.removeAttribute('src')"></div>
+      <div class="cd"><span class="b">${p.brand}</span><h4>${pName(p)}</h4>
+        <div class="qty"><button onclick="changeQty('${p.id}',-1)">&minus;</button><span class="num">${c.qty}</span><button onclick="changeQty('${p.id}',1)">+</button></div>
+      </div>
+      <div class="cr"><span class="p">${fmt(p.price*c.qty)}</span><button class="rm" onclick="removeLine('${p.id}')">${L.remove}</button></div>
+    </div>`;}).join("");
+  const t=cartTotal();
+  foot.innerHTML=`<div class="srow"><span>${L.subtotal}</span><span class="num">${fmt(t)}</span></div>
+    <div class="srow"><span>${L.shipping}</span><span class="num">${t>=500?L.free:'$15'}</span></div>
+    <div class="srow tot"><span>${L.total}</span><span class="num">${fmt(t>=500?t:t+15)}</span></div>
+    <button class="checkout-btn" onclick="startCheckout()">${L.checkout}</button>`;
+}
+function openCart(){document.getElementById("drawer").classList.add("open");document.getElementById("scrim").classList.add("open");document.body.style.overflow="hidden";}
+function closeCart(){document.getElementById("drawer").classList.remove("open");document.getElementById("scrim").classList.remove("open");document.body.style.overflow="";}
+
+/* checkout */
+let coStep=1;
+function openModal(){document.getElementById("mscrim").classList.add("open");document.body.style.overflow="hidden";}
+function closeModal(){document.getElementById("mscrim").classList.remove("open");if(!document.getElementById("drawer").classList.contains("open"))document.body.style.overflow="";}
+document.getElementById("mscrim").addEventListener("click",e=>{if(e.target.id==="mscrim")closeModal();});
+function startCheckout(){if(cart.length===0){toast(T[state.lang].cartEmptyToast);return;}closeCart();coStep=1;renderCheckout();openModal();}
+function coGo(s){coStep=s;renderCheckout();}
+function renderCheckout(){
+  const L=T[state.lang];
+  const t=cartTotal(); const ship=t>=500?0:15;
+  document.getElementById("modal").innerHTML=`
+   <div class="modal-in">
+    <button class="mclose" onclick="closeModal()" aria-label="Close">&times;</button>
+    <div class="steps">
+      ${L.steps.map((s,i)=>`<div class="step ${coStep>i+1?'done':''} ${coStep===i+1?'on':''}"><div class="d num">${coStep>i+1?'&#10003;':i+1}</div><small>${s}</small></div>`).join("")}
+    </div>
+    <div class="pane ${coStep===1?'show':''}">
+      <div class="osum">
+        ${cart.map(c=>{const p=PRODUCTS.find(x=>x.id===c.id);return `<div class="r"><span>${pName(p)} <span class="num">&times;${c.qty}</span></span><span class="num">${fmt(p.price*c.qty)}</span></div>`;}).join("")}
+        <div class="r"><span>${L.shipping}</span><span class="num">${ship===0?L.free:'$15'}</span></div>
+        <div class="r t"><span>${L.total}</span><span class="num">${fmt(t+ship)}</span></div>
+      </div>
+      <div class="cnav"><button class="bg" onclick="closeModal()">${L.backToShop}</button><button class="bp" onclick="coGo(2)">${L.continue}</button></div>
+    </div>
+    <div class="pane ${coStep===2?'show':''}">
+      <div class="two"><div class="field"><label>${L.firstName}</label><input id="f_first" placeholder="${L.phFirst}"></div><div class="field"><label>${L.lastName}</label><input id="f_last" placeholder="${L.phLast}"></div></div>
+      <div class="field"><label>${L.email}</label><input id="f_email" type="email" placeholder="you@example.com"></div>
+      <div class="field"><label>${L.address}</label><input id="f_addr" placeholder="${L.phAddr}"></div>
+      <div class="two"><div class="field"><label>${L.city}</label><input id="f_city" placeholder="${L.phCity}"></div><div class="field"><label>${L.country}</label><select><option>${L.cEgypt}</option><option>${L.cUAE}</option><option>${L.cKSA}</option><option>${L.cUSA}</option></select></div></div>
+      <div class="cnav"><button class="bg" onclick="coGo(1)">${L.back}</button><button class="bp" onclick="validateDetails()">${L.continuePay}</button></div>
+    </div>
+    <div class="pane ${coStep===3?'show':''}">
+      <div class="field"><label>${L.cardNumber}</label><input id="f_card" class="num" inputmode="numeric" maxlength="19" placeholder="4242 4242 4242 4242" oninput="spaceCard(this)"></div>
+      <div class="two"><div class="field"><label>${L.expiry}</label><input id="f_exp" class="num" maxlength="7" placeholder="MM / YY"></div><div class="field"><label>${L.cvc}</label><input id="f_cvc" class="num" inputmode="numeric" maxlength="4" placeholder="123"></div></div>
+      <div class="osum"><div class="r t"><span>${L.amountDue}</span><span class="num">${fmt(t+ship)}</span></div></div>
+      <div class="cnav"><button class="bg" onclick="coGo(2)">${L.back}</button><button class="bp" onclick="placeOrder()">${L.pay} <span class="num">${fmt(t+ship)}</span></button></div>
+    </div>
+    <div class="pane ${coStep===4?'show':''}">
+      <div class="done"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="#04222a" stroke-width="3" style="width:32px;height:32px"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h2>${L.orderPlaced}</h2><p>${L.orderConfirm}</p>
+        <div class="oid num" id="oid"></div>
+        <button class="bp" style="padding:12px 22px;border-radius:9px;margin-top:8px" onclick="closeModal()">${L.keepShopping}</button></div>
+    </div>
+   </div>`;
+}
+function validateDetails(){
+  const L=T[state.lang];
+  for(const id of ["f_first","f_last","f_email","f_addr","f_city"]){const v=document.getElementById(id);if(!v.value.trim()){toast(L.completeDetails);v.focus();return;}}
+  if(!/^\S+@\S+\.\S+$/.test(document.getElementById("f_email").value)){toast(L.validEmail);return;}
+  coGo(3);
+}
+function spaceCard(el){el.value=el.value.replace(/\D/g,"").replace(/(.{4})/g,"$1 ").trim();}
+function placeOrder(){
+  const L=T[state.lang];
+  if(document.getElementById("f_card").value.replace(/\s/g,"").length<15){toast(L.validCard);return;}
+  if(!document.getElementById("f_exp").value.trim()||!document.getElementById("f_cvc").value.trim()){toast(L.completePayment);return;}
+  coStep=4;renderCheckout();
+  document.getElementById("oid").textContent="VE-"+Math.floor(100000+(cart.length*7919+cartTotal()*31)%900000);
+  cart=[];persist();
+}
+
+/* misc */
+let tT;
+function toast(m){const t=document.getElementById("toast");document.getElementById("toastMsg").textContent=m;t.classList.add("show");clearTimeout(tT);tT=setTimeout(()=>t.classList.remove("show"),2300);}
+function toggleFacets(){document.getElementById("facets").classList.toggle("open");}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeCart();document.getElementById("facets").classList.remove("open");}});
+
+/* ===== language ===== */
+function setLang(lang){
+  state.lang = (lang==="ar") ? "ar" : "en";
+  const L = T[state.lang];
+  localStorage.setItem("volt_lang", state.lang);
+  document.documentElement.lang = state.lang;
+  document.documentElement.dir = L.dir;
+  // static UI via data-i18n
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(L[k]!==undefined) el.textContent = L[k];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const k = el.getAttribute("data-i18n-html");
+    if(L[k]!==undefined) el.innerHTML = L[k];
+  });
+  // search placeholder + button label
+  document.getElementById("search").placeholder = L.searchPh;
+  document.getElementById("langLabel").textContent = L.langBtn;
+  // re-render everything dynamic
+  buildFacets();
+  render();
+  renderCart();
+  if(document.getElementById("mscrim").classList.contains("open")) renderCheckout();
+}
+function toggleLang(){ setLang(state.lang==="ar" ? "en" : "ar"); }
+
+/* init */
+buildFacets();render();renderCart();updateCount();
+setLang(localStorage.getItem("volt_lang")==="ar" ? "ar" : "en");
+</script>
+</body>
+</html>
