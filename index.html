@@ -279,6 +279,181 @@ footer a:hover{color:var(--neon)}
   .rbtn{padding:9px 13px}
 }
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* ============ ROUTED VIEWS (product / info pages) ============ */
+.hidden{display:none!important}
+.card{cursor:pointer}
+.subview{max-width:1280px;margin:0 auto;padding:30px 22px 70px}
+.crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--faint);margin-bottom:22px;flex-wrap:wrap}
+.crumb a{color:var(--muted)}.crumb a:hover{color:var(--neon)}
+.crumb .sep{color:var(--line)}
+.backlink{display:inline-flex;align-items:center;gap:7px;color:var(--neon);font-size:14px;font-weight:600;margin-bottom:18px}
+.backlink svg{width:16px;height:16px}
+[dir=rtl] .backlink svg{transform:scaleX(-1)}
+
+/* product detail */
+.pdp{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:start}
+.pdp-media{position:relative;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg2);aspect-ratio:4/3}
+.pdp-media img{width:100%;height:100%;object-fit:cover}
+.pdp-media .tagn{position:absolute;top:14px;left:14px}
+[dir=rtl] .pdp-media .tagn{left:auto;right:14px}
+.pdp-info .brand{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:700}
+.pdp-info h1{font-size:clamp(26px,4vw,38px);font-weight:700;margin:6px 0 10px;line-height:1.1}
+.pdp-info .rating{font-size:14px;margin-bottom:16px}
+.pdp-price{font-family:"Space Grotesk";font-weight:700;font-size:34px;margin:6px 0 18px}
+.pdp-desc{color:var(--muted);font-size:15px;line-height:1.65;margin-bottom:20px;max-width:54ch}
+.spectable{width:100%;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:22px}
+.spectable .srowx{display:flex;justify-content:space-between;padding:11px 15px;font-size:14px;border-bottom:1px solid var(--line)}
+.spectable .srowx:last-child{border-bottom:none}
+.spectable .srowx:nth-child(odd){background:var(--panel)}
+.spectable .srowx .k{color:var(--faint)}
+.spectable .srowx .v{color:var(--ink);font-weight:600}
+.pdp-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:9px;background:var(--neon);color:#04222a;font-weight:700;font-size:15px;padding:14px 24px;border-radius:11px;transition:.15s}
+.btn-primary:hover{background:#fff}
+.btn-primary svg{width:18px;height:18px}
+.btn-ghost{display:inline-flex;align-items:center;gap:9px;background:var(--panel);border:1.5px solid var(--line);color:var(--ink);font-weight:700;font-size:15px;padding:14px 24px;border-radius:11px;transition:.15s}
+.btn-ghost:hover{border-color:var(--teal)}
+.pdp-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.pdp-meta .pill{font-size:12px;padding:5px 11px;border-radius:30px;background:var(--panel2);border:1px solid var(--line);color:var(--muted)}
+.related h2{font-size:22px;margin:48px 0 18px}
+.related .grid{margin-top:0}
+@media(max-width:760px){.pdp{grid-template-columns:1fr;gap:24px}}
+
+/* info pages */
+.infopage{max-width:760px}
+.infopage .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--neon);margin-bottom:12px}
+.infopage h1{font-size:clamp(28px,4.5vw,42px);font-weight:700;margin-bottom:14px;line-height:1.08}
+.infopage .lead{font-size:18px;color:var(--muted);margin-bottom:30px;line-height:1.6}
+.infopage h2{font-size:21px;margin:30px 0 10px}
+.infopage p{color:var(--muted);font-size:15.5px;line-height:1.7;margin-bottom:14px}
+.infopage ul{list-style:none;margin:0 0 18px}
+.infopage li{position:relative;padding-left:24px;color:var(--muted);font-size:15.5px;line-height:1.7;margin-bottom:9px}
+.infopage li::before{content:"";position:absolute;left:4px;top:10px;width:7px;height:7px;border-radius:2px;background:var(--neon)}
+[dir=rtl] .infopage li{padding-left:0;padding-right:24px}
+[dir=rtl] .infopage li::before{left:auto;right:4px}
+.infocards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:18px 0 24px}
+.infocard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.infocard h3{font-size:15px;color:var(--neon);margin-bottom:8px}
+.infocard p{font-size:14px;margin:0}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:8px}
+.job{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;background:var(--panel)}
+.job h3{font-size:16px;margin-bottom:4px}
+.job .loc{font-size:13px;color:var(--faint)}
+
+/* ============ SECRET STRATEGY PRESENTATION ============ */
+.present{position:fixed;inset:0;z-index:120;background:
+   radial-gradient(70% 90% at 85% -10%,rgba(28,114,147,.45),transparent 60%),
+   radial-gradient(60% 90% at -5% 110%,rgba(46,230,214,.20),transparent 60%),
+   #060a10;
+  display:none;flex-direction:column;opacity:0;transition:opacity .4s}
+.present.open{display:flex;opacity:1}
+.present-top{display:flex;align-items:center;justify-content:space-between;padding:18px 26px;flex-shrink:0}
+.present-brand{display:flex;align-items:center;gap:10px;font-family:"Space Grotesk";font-weight:700;font-size:18px}
+.present-brand .bolt{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--neon),var(--teal));color:#04222a}
+.present-brand .bolt svg{width:18px;height:18px}
+.present-brand b{color:var(--neon)}
+.present-top .tools{display:flex;align-items:center;gap:10px}
+.present-top button{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:30px;padding:8px 15px;font-size:13px;font-weight:600;color:var(--ink);transition:.15s}
+.present-top button:hover{border-color:var(--neon);color:var(--neon)}
+.present-top button svg{width:15px;height:15px}
+.present-stage{flex:1;display:grid;place-items:center;padding:10px 26px 0;overflow:hidden;position:relative}
+.pslide{width:100%;max-width:980px;display:none;animation:slideIn .5s both}
+.pslide.show{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(26px) scale(.98)}to{opacity:1;transform:none}}
+.pslide .pkick{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--neon);margin-bottom:16px}
+.pslide .pkick .qn{background:var(--neon);color:#04222a;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-family:"Space Grotesk";font-size:15px}
+.pslide h2{font-family:"Space Grotesk";font-size:clamp(26px,4.2vw,46px);font-weight:700;line-height:1.08;margin-bottom:22px;max-width:18ch}
+.pslide ul{list-style:none;display:grid;gap:13px;margin-bottom:26px}
+.pslide li{position:relative;padding-left:30px;font-size:clamp(15px,1.8vw,18.5px);color:#cfe0f2;line-height:1.55;max-width:60ch}
+.pslide li b{color:#fff}
+.pslide li::before{content:"";position:absolute;left:0;top:9px;width:13px;height:13px;border-radius:4px;background:linear-gradient(135deg,var(--neon),var(--teal))}
+[dir=rtl] .pslide li{padding-left:0;padding-right:30px}
+[dir=rtl] .pslide li::before{left:auto;right:0}
+.pslide h2,.pslide li{max-width:none}
+.proofrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+.proofrow .lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.proofchip{display:inline-flex;align-items:center;gap:8px;background:rgba(46,230,214,.10);border:1px solid var(--neon-dim);color:var(--neon);font-size:13.5px;font-weight:600;padding:9px 15px;border-radius:30px;transition:.15s}
+.proofchip:hover{background:var(--neon);color:#04222a}
+.proofchip svg{width:15px;height:15px}
+/* title + closing slides */
+.pslide.title-slide{text-align:center}
+.pslide.title-slide h1{font-family:"Space Grotesk";font-size:clamp(34px,6vw,68px);font-weight:700;line-height:1.02;margin:18px auto 16px;max-width:16ch}
+.pslide.title-slide h1 em{font-style:normal;color:var(--neon)}
+.pslide.title-slide p{color:var(--muted);font-size:clamp(16px,2vw,20px);max-width:48ch;margin:0 auto 8px}
+.pslide.title-slide .hint{margin-top:26px;font-size:13px;color:var(--faint)}
+.framegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
+.framecard{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:18px}
+.framecard h3{font-family:"Space Grotesk";color:var(--neon);font-size:15px;letter-spacing:.04em;margin-bottom:10px}
+.framecard span{display:block;color:#cfe0f2;font-size:13.5px;padding:3px 0}
+@media(max-width:680px){.framegrid{grid-template-columns:1fr}}
+/* bottom nav */
+.present-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 26px 22px;flex-shrink:0}
+.pdots{display:flex;gap:8px;flex-wrap:wrap;flex:1;justify-content:center}
+.pdot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);transition:.2s;cursor:pointer}
+.pdot.on{background:var(--neon);transform:scale(1.35)}
+.pnav{display:flex;gap:10px}
+.pnav button{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);transition:.15s}
+.pnav button:hover:not(:disabled){border-color:var(--neon);color:var(--neon)}
+.pnav button:disabled{opacity:.3;cursor:default}
+.pnav button svg{width:20px;height:20px}
+[dir=rtl] .pnav button svg{transform:scaleX(-1)}
+.pprogress{position:absolute;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--neon));transition:width .4s;z-index:2}
+.pcounter{font-family:"Space Grotesk";font-size:13px;color:var(--faint);min-width:54px}
+@media(max-width:560px){
+  .present-bottom{flex-wrap:wrap}.pdots{order:3;flex-basis:100%}
+  .pslide ul{gap:9px}
+}
+
+/* ============ CHAT ASSISTANT ============ */
+.chat-fab{position:fixed;bottom:22px;right:22px;z-index:95;display:flex;align-items:center;gap:10px;background:var(--neon);color:#04222a;font-weight:700;font-size:14px;padding:13px 18px;border-radius:30px;box-shadow:0 14px 34px -10px rgba(46,230,214,.5);transition:.18s}
+.chat-fab:hover{transform:translateY(-2px)}
+.chat-fab svg{width:20px;height:20px}
+[dir=rtl] .chat-fab{right:auto;left:22px}
+.chat-panel{position:fixed;bottom:22px;right:22px;z-index:96;width:380px;max-width:calc(100vw - 28px);height:560px;max-height:calc(100vh - 44px);background:var(--bg2);border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 70px -25px rgba(0,0,0,.85);display:flex;flex-direction:column;overflow:hidden;transform:translateY(20px) scale(.97);opacity:0;visibility:hidden;transition:.25s}
+.chat-panel.open{transform:none;opacity:1;visibility:visible}
+[dir=rtl] .chat-panel{right:auto;left:22px}
+.chat-head{display:flex;align-items:center;gap:11px;padding:15px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,rgba(28,114,147,.28),transparent)}
+.chat-head .av{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--neon),var(--teal));color:#04222a;flex-shrink:0}
+.chat-head .av svg{width:21px;height:21px}
+.chat-head .ht{flex:1;min-width:0}
+.chat-head .ht b{font-family:"Space Grotesk";font-size:15px;display:block}
+.chat-head .ht small{color:var(--faint);font-size:11.5px}
+.chat-head .ht small .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--neon);margin-right:5px;vertical-align:middle}
+[dir=rtl] .chat-head .ht small .dot{margin-right:0;margin-left:5px}
+.chat-head .cx{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:var(--muted);font-size:19px}
+.chat-head .cx:hover{background:var(--panel);color:var(--ink)}
+.chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:11px}
+.msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.55;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
+.msg.bot{align-self:flex-start;background:var(--panel);border:1px solid var(--line);border-bottom-left-radius:5px}
+.msg.me{align-self:flex-end;background:var(--neon);color:#04222a;font-weight:500;border-bottom-right-radius:5px}
+[dir=rtl] .msg.bot{border-bottom-left-radius:14px;border-bottom-right-radius:5px}
+[dir=rtl] .msg.me{border-bottom-right-radius:14px;border-bottom-left-radius:5px}
+.chat-typing{align-self:flex-start;display:flex;gap:4px;padding:13px 15px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.chat-typing span{width:7px;height:7px;border-radius:50%;background:var(--faint);animation:blink 1.2s infinite}
+.chat-typing span:nth-child(2){animation-delay:.2s}.chat-typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.chat-sugg{display:flex;gap:7px;flex-wrap:wrap;padding:0 16px 10px}
+.chat-sugg button{font-size:12.5px;color:var(--neon);background:rgba(46,230,214,.08);border:1px solid var(--neon-dim);border-radius:30px;padding:7px 12px;transition:.15s;text-align:start}
+.chat-sugg button:hover{background:var(--neon);color:#04222a}
+.chat-foot{display:flex;gap:9px;padding:12px 14px;border-top:1px solid var(--line);align-items:flex-end}
+.chat-foot textarea{flex:1;resize:none;background:var(--panel);border:1.5px solid var(--line);border-radius:12px;color:var(--ink);font-size:14px;padding:10px 12px;max-height:90px;font-family:inherit;line-height:1.4}
+.chat-foot textarea:focus{outline:none;border-color:var(--neon)}
+.chat-send{width:42px;height:42px;border-radius:12px;background:var(--neon);color:#04222a;display:grid;place-items:center;flex-shrink:0;transition:.15s}
+.chat-send:hover{background:#fff}.chat-send:disabled{opacity:.4;cursor:default}
+.chat-send svg{width:19px;height:19px}
+[dir=rtl] .chat-send svg{transform:scaleX(-1)}
+/* polished bot-message formatting (markdown rendered) */
+.msg.bot{white-space:normal}
+.msg.bot p{margin:0 0 8px}.msg.bot p:last-child{margin:0}
+.msg.bot ul,.msg.bot ol{margin:5px 0 9px;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+[dir=rtl] .msg.bot ul,[dir=rtl] .msg.bot ol{padding-left:0;padding-right:18px}
+.msg.bot li{line-height:1.5}
+.msg.bot li::marker{color:var(--neon-dim)}
+.msg.bot strong{color:var(--neon);font-weight:700}
+.msg.bot a.plink{color:var(--neon);font-weight:600;text-decoration:none;border-bottom:1px dashed var(--neon-dim)}
+.msg.bot a.plink:hover{border-bottom-style:solid}
+@media(max-width:480px){.chat-panel{height:calc(100vh - 24px);bottom:12px;right:12px}[dir=rtl] .chat-panel{left:12px}.chat-fab span{display:none}.chat-fab{padding:14px}}
 </style>
 </head>
 <body>
@@ -307,6 +482,7 @@ footer a:hover{color:var(--neon)}
   </div>
 </header>
 
+<div id="view-store">
 <section class="hero">
   <div class="hero-in">
     <span class="kick" data-i18n="heroKick">Search smarter</span>
@@ -378,6 +554,10 @@ footer a:hover{color:var(--neon)}
     </main>
   </div>
 </div>
+</div><!-- /view-store -->
+
+<section id="view-detail" class="subview hidden"></section>
+<section id="view-page" class="subview hidden"></section>
 
 <footer>
   <div class="wrap">
@@ -388,9 +568,9 @@ footer a:hover{color:var(--neon)}
         </div>
         <p style="color:var(--muted);font-size:14px;max-width:300px" data-i18n="footTagline">The electronics marketplace built around search. No noise, just the specs you filter for.</p>
       </div>
-      <div><h4 data-i18n="footShop">Shop</h4><a href="#" data-i18n="footAudio">Audio</a><a href="#" data-i18n="footComputing">Computing</a><a href="#" data-i18n="footMobile">Mobile</a><a href="#" data-i18n="footAccessories">Accessories</a></div>
-      <div><h4 data-i18n="footSupport">Support</h4><a href="#" data-i18n="footShipping">Shipping</a><a href="#" data-i18n="footReturns">Returns</a><a href="#" data-i18n="footWarranty">Warranty</a><a href="#" data-i18n="footContact">Contact</a></div>
-      <div><h4 data-i18n="footCompany">Company</h4><a href="#" data-i18n="footAbout">About</a><a href="#" data-i18n="footCareers">Careers</a><a href="#" data-i18n="footPress">Press</a><a href="#" data-i18n="footPrivacy">Privacy</a></div>
+      <div><h4 data-i18n="footShop">Shop</h4><a href="#/" onclick="shopGroup('audio')" data-i18n="footAudio">Audio</a><a href="#/" onclick="shopGroup('computing')" data-i18n="footComputing">Computing</a><a href="#/" onclick="shopGroup('mobile')" data-i18n="footMobile">Mobile</a><a href="#/" onclick="shopGroup('accessories')" data-i18n="footAccessories">Accessories</a></div>
+      <div><h4 data-i18n="footSupport">Support</h4><a href="#/shipping" data-i18n="footShipping">Shipping</a><a href="#/returns" data-i18n="footReturns">Returns</a><a href="#/warranty" data-i18n="footWarranty">Warranty</a><a href="#/contact" data-i18n="footContact">Contact</a></div>
+      <div><h4 data-i18n="footCompany">Company</h4><a href="#/about" data-i18n="footAbout">About</a><a href="#/careers" data-i18n="footCareers">Careers</a><a href="#/press" data-i18n="footPress">Press</a><a href="#/privacy" data-i18n="footPrivacy">Privacy</a></div>
     </div>
     <div class="fbottom">
       <span data-i18n="footCopy">&copy; 2024 VoltEdge. A demonstration storefront.</span>
@@ -412,6 +592,46 @@ footer a:hover{color:var(--neon)}
 
 <!-- toast -->
 <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Added</span></div>
+
+<!-- secret strategy presentation -->
+<div class="present" id="present" aria-hidden="true">
+  <div class="pprogress" id="pprogress"></div>
+  <div class="present-top">
+    <span class="present-brand"><span class="bolt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>Volt<b>Edge</b> <span id="pTitle" style="color:var(--muted);font-weight:600;font-size:14px"></span></span>
+    <div class="tools">
+      <button onclick="presLang()" id="pLangBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span id="pLangLabel">العربية</span></button>
+      <button onclick="closePresent()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg><span id="pExit">Exit</span></button>
+    </div>
+  </div>
+  <div class="present-stage" id="pStage"></div>
+  <div class="present-bottom">
+    <span class="pcounter" id="pCounter"></span>
+    <div class="pdots" id="pDots"></div>
+    <div class="pnav">
+      <button id="pPrev" onclick="presGo(-1)" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button id="pNext" onclick="presGo(1)" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- chat assistant -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Open assistant">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"/></svg>
+  <span id="chatFabLabel">Ask VoltEdge</span>
+</button>
+<div class="chat-panel" id="chatPanel" aria-label="Assistant">
+  <div class="chat-head">
+    <span class="av"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>
+    <div class="ht"><b id="chatTitle">VoltEdge Assistant</b><small><span class="dot"></span><span id="chatStatus">Online</span></small></div>
+    <button class="cx" onclick="toggleChat()" aria-label="Close">&times;</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-sugg" id="chatSugg"></div>
+  <div class="chat-foot">
+    <textarea id="chatInput" rows="1" placeholder="Type a message..." oninput="autoGrow(this)" onkeydown="chatKey(event)"></textarea>
+    <button class="chat-send" id="chatSend" onclick="sendChat()" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+  </div>
+</div>
 
 <script>
 const IMG = id => "https://images.unsplash.com/photo-"+id+"?w=900&q=80&auto=format&fit=crop";
@@ -611,7 +831,13 @@ function matches(p){
 }
 
 /* events */
-function onSearch(v){state.q=v;document.getElementById("clrSearch").classList.toggle("show",!!v);render();}
+function onSearch(v){
+  // secret trigger: typing the strategy keyword turns the whole store into a presentation
+  if(typeof SECRET!=="undefined" && v.trim().toLowerCase()===SECRET){
+    clearSearch(); openPresent(); return;
+  }
+  state.q=v;document.getElementById("clrSearch").classList.toggle("show",!!v);render();
+}
 function clearSearch(){state.q="";document.getElementById("search").value="";document.getElementById("clrSearch").classList.remove("show");render();}
 function toggleFacet(group,val){
   // match real value (in case of stripped quotes, values have none here)
@@ -684,7 +910,7 @@ function render(rebuildCounts=true){
     return;
   }
   grid.innerHTML = list.map((p,i)=>`
-    <article class="card" style="animation-delay:${Math.min(i,8)*0.03}s">
+    <article class="card" style="animation-delay:${Math.min(i,8)*0.03}s" onclick="openProduct('${p.id}')">
       <div class="ph">
         ${NEWEST.has(p.id)?`<span class="tagn">${t.newTag}</span>`:''}
         <span class="conn-tag">${connLabel(p.conn)}</span>
@@ -697,7 +923,7 @@ function render(rebuildCounts=true){
         <div class="rating"><span class="st">${"&#9733;".repeat(Math.round(p.rating))}</span> <span class="num">${p.rating.toFixed(1)}</span></div>
         <div class="foot">
           <span class="price">${fmt(p.price)}</span>
-          <button class="add" onclick="addToCart('${p.id}')">
+          <button class="add" onclick="event.stopPropagation();addToCart('${p.id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>${t.add}
           </button>
         </div>
@@ -834,12 +1060,542 @@ function setLang(lang){
   render();
   renderCart();
   if(document.getElementById("mscrim").classList.contains("open")) renderCheckout();
+  if(typeof renderRoute==="function") renderRoute(true);   // re-render product/info pages in new language (no scroll jump)
+  if(typeof syncPresentLang==="function") syncPresentLang();// re-render open presentation in new language
+  if(typeof applyChatLang==="function") applyChatLang();    // re-label the chat assistant
 }
 function toggleLang(){ setLang(state.lang==="ar" ? "en" : "ar"); }
+
+/* =====================================================================
+   ROUTER + PRODUCT PAGES + INFO PAGES + SECRET STRATEGY PRESENTATION
+   ===================================================================== */
+
+/* secret keyword: typing this in the search bar launches the presentation.
+   Also reachable directly at  ...github.io/voltedge-electronics/#/strategy  */
+const SECRET = "strategy";
+
+const SVG_BACK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>`;
+const SVG_PLUS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>`;
+
+/* small label set for product + info pages */
+const UIX = {
+  en:{home:"Home",addCart:"Add to cart",buyNow:"Buy now",specs:"Specifications",related:"You may also like",connectivity:"Connectivity",backShop:"Back to store",noteDemo:"This is a demonstration storefront; the details shown are illustrative."},
+  ar:{home:"الرئيسية",addCart:"أضف إلى السلة",buyNow:"اشترِ الآن",specs:"المواصفات",related:"قد يعجبك أيضاً",connectivity:"الاتصال",backShop:"العودة إلى المتجر",noteDemo:"هذا متجر عرض توضيحي؛ والتفاصيل المعروضة توضيحية."}
+};
+
+/* generated bilingual product description */
+function describe(p){
+  const specs = Object.entries(p.specs).map(([k,v])=>specKey(k)+" "+specVal(v)).join(", ");
+  if(state.lang==="ar")
+    return `تعرّف على <b>${pName(p)}</b> من ${p.brand} ، ${catLabel(p.cat)} مصمّم للاستخدام عبر ${connLabel(p.conn)}. أبرز المواصفات: ${specs}. وبتقييم ${p.rating.toFixed(1)} نجمة، فهو من أكثر منتجات ${catLabel(p.cat)} بحثاً على فولت إيدج.`;
+  return `Meet the <b>${pName(p)}</b> from ${p.brand} , a ${catLabel(p.cat).toLowerCase()} device built for ${connLabel(p.conn)} use. Key specs: ${specs}. With a ${p.rating.toFixed(1)}-star rating, it's one of VoltEdge's most-searched ${catLabel(p.cat).toLowerCase()}.`;
+}
+
+/* navigate helper */
+function openProduct(id){ location.hash = "#/product/"+id; }
+function shopCat(c){ state.cats=new Set([c]); location.hash="#/"; buildFacets(); render(); return false; }
+const SHOP_GROUPS={audio:["Headphones","Earbuds","Speakers"],computing:["Laptops","Monitors","Keyboards","Mice","Tablets"],mobile:["Phones","Smartwatches"],accessories:["Keyboards","Mice"]};
+function shopGroup(g){ state.cats=new Set(SHOP_GROUPS[g]||[]); state.brands.clear(); state.conns.clear(); location.hash="#/"; buildFacets(); render(); setTimeout(()=>document.querySelector(".shell")?.scrollIntoView({behavior:"smooth",block:"start"}),60); return false; }
+function buyNow(id){ addToCart(id); location.hash="#/"; setTimeout(startCheckout,60); }
+
+/* which view is visible */
+function showView(name){
+  document.getElementById("view-store").classList.toggle("hidden",name!=="store");
+  document.getElementById("view-detail").classList.toggle("hidden",name!=="detail");
+  document.getElementById("view-page").classList.toggle("hidden",name!=="page");
+}
+
+/* small product card (related list) */
+function miniCard(p){
+  const t=T[state.lang];
+  return `<article class="card" onclick="openProduct('${p.id}')">
+    <div class="ph">${NEWEST.has(p.id)?`<span class="tagn">${t.newTag}</span>`:''}<span class="conn-tag">${connLabel(p.conn)}</span>
+      <img src="${p.img}" alt="${pName(p)}" loading="lazy" referrerpolicy="no-referrer" style="background:${AC}" onerror="this.style.background='${AC}';this.removeAttribute('src')"></div>
+    <div class="body"><span class="brand">${p.brand} &middot; ${catLabel(p.cat)}</span><h3>${pName(p)}</h3>
+      <div class="rating"><span class="st">${"&#9733;".repeat(Math.round(p.rating))}</span> <span class="num">${p.rating.toFixed(1)}</span></div>
+      <div class="foot"><span class="price">${fmt(p.price)}</span><button class="add" onclick="event.stopPropagation();addToCart('${p.id}')">${t.add}</button></div>
+    </div></article>`;
+}
+
+/* PRODUCT DETAIL PAGE */
+function renderDetail(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  const L=T[state.lang], U=UIX[state.lang], el=document.getElementById("view-detail");
+  if(!p){ el.innerHTML=`<a class="backlink" href="#/">${SVG_BACK}${U.backShop}</a><div class="infopage"><h1>404</h1><p>${L.emptyTitle}</p></div>`; return; }
+  const related=PRODUCTS.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,3);
+  el.innerHTML=`
+    <a class="backlink" href="#/">${SVG_BACK}${U.backShop}</a>
+    <div class="crumb"><a href="#/">${U.home}</a><span class="sep">&rsaquo;</span><a href="#/" onclick="return shopCat('${p.cat}')">${catLabel(p.cat)}</a><span class="sep">&rsaquo;</span><span>${pName(p)}</span></div>
+    <div class="pdp">
+      <div class="pdp-media">${NEWEST.has(p.id)?`<span class="tagn">${L.newTag}</span>`:''}
+        <img src="${p.img}" alt="${pName(p)}" referrerpolicy="no-referrer" style="background:${AC}" onerror="this.style.background='${AC}';this.removeAttribute('src')"></div>
+      <div class="pdp-info">
+        <div class="brand">${p.brand} &middot; ${catLabel(p.cat)}</div>
+        <h1>${pName(p)}</h1>
+        <div class="rating"><span class="st">${"&#9733;".repeat(Math.round(p.rating))}</span> <span class="num">${p.rating.toFixed(1)}</span></div>
+        <div class="pdp-meta"><span class="pill">${connLabel(p.conn)}</span>${NEWEST.has(p.id)?`<span class="pill">${L.newTag}</span>`:''}<span class="pill">${catLabel(p.cat)}</span></div>
+        <div class="pdp-price">${fmt(p.price)}</div>
+        <p class="pdp-desc">${describe(p)}</p>
+        <div class="spectable">
+          ${Object.entries(p.specs).map(([k,v])=>`<div class="srowx"><span class="k">${specKey(k)}</span><span class="v num">${specVal(v)}</span></div>`).join("")}
+          <div class="srowx"><span class="k">${U.connectivity}</span><span class="v">${connLabel(p.conn)}</span></div>
+        </div>
+        <div class="pdp-cta">
+          <button class="btn-primary" onclick="addToCart('${p.id}')">${SVG_PLUS}${U.addCart}</button>
+          <button class="btn-ghost" onclick="buyNow('${p.id}')">${U.buyNow}</button>
+        </div>
+      </div>
+    </div>
+    ${related.length?`<div class="related"><h2>${U.related}</h2><div class="grid">${related.map(miniCard).join("")}</div></div>`:''}`;
+}
+
+/* INFO PAGES (Support + Company) */
+const PAGE_SLUGS=["shipping","returns","warranty","contact","about","careers","press","privacy"];
+const PAGES={
+ en:{
+  shipping:{eyebrow:"Support",title:"Shipping",lead:"Fast, tracked delivery across the region , with free shipping on orders over $500.",
+    html:`<div class="infocards">
+      <div class="infocard"><h3>Standard</h3><p>3–5 business days. $15 flat, or free over $500.</p></div>
+      <div class="infocard"><h3>Express</h3><p>1–2 business days in major cities.</p></div>
+      <div class="infocard"><h3>Tracking</h3><p>A tracking link is emailed the moment your order ships.</p></div></div>
+      <h2>Where we ship</h2>
+      <ul><li>Egypt, the United Arab Emirates, Saudi Arabia and the United States.</li>
+      <li>Customs and duties, where they apply, are calculated at checkout.</li>
+      <li>Orders placed before 2pm Cairo time are processed the same day.</li></ul>
+      <p style="font-size:13px">${UIX.en.noteDemo}</p>`},
+  returns:{eyebrow:"Support",title:"Returns",lead:"Changed your mind? Return any unused item within 30 days.",
+    html:`<ul><li>30-day return window from the delivery date.</li>
+      <li>The item must be in its original condition and packaging.</li>
+      <li>Refunds go back to your original payment method within 5–7 days of inspection.</li>
+      <li>To start a return, contact support with your order ID (the <span class="num">VE-</span> number from checkout).</li></ul>
+      <p style="font-size:13px">${UIX.en.noteDemo}</p>`},
+  warranty:{eyebrow:"Support",title:"Warranty",lead:"Every VoltEdge device is covered against manufacturing defects.",
+    html:`<ul><li>12-month limited warranty as standard; 24 months on selected laptops and cameras.</li>
+      <li>Covers defects in materials and workmanship; excludes accidental and liquid damage.</li>
+      <li>Claims handled by mail-in or carry-in, with advance replacement on eligible items.</li></ul>
+      <p style="font-size:13px">${UIX.en.noteDemo}</p>`},
+  contact:{eyebrow:"Support",title:"Contact us",lead:"Real people, two languages. We usually reply within one business day.",
+    html:`<div class="contact-grid">
+      <div class="infocard"><h3>Support</h3><p>support@voltedge.example</p></div>
+      <div class="infocard"><h3>Sales</h3><p>sales@voltedge.example</p></div>
+      <div class="infocard"><h3>Hours</h3><p>Sun–Thu, 9:00–18:00 (Cairo)</p></div>
+      <div class="infocard"><h3>Social</h3><p>@voltedge</p></div></div>
+      <p style="font-size:13px">${UIX.en.noteDemo}</p>`},
+  about:{eyebrow:"Company",title:"About VoltEdge",lead:"We built the electronics store we wished existed , one where search actually works.",
+    html:`<ul><li>Founded on a simple idea: buying tech should take seconds, not twenty open tabs.</li>
+      <li>Every product is indexed by brand, price, rating and the specs that matter, so you filter your way to the exact device.</li>
+      <li>Built search-first and bilingual (English + Arabic) from day one, for customers across the region.</li></ul>
+      <p>VoltEdge is the search-and-discovery reference in a set of storefronts demonstrating Chapter 8, E-Commerce Systems.</p>`},
+  careers:{eyebrow:"Company",title:"Careers",lead:"Help us make finding the right tech effortless.",
+    html:`<div class="job"><h3>Frontend Engineer</h3><div class="loc">Remote / Cairo</div></div>
+      <div class="job"><h3>Product Manager, Search</h3><div class="loc">Cairo</div></div>
+      <div class="job"><h3>Bilingual Customer Experience Lead</h3><div class="loc">Remote</div></div>
+      <p>Don't see your role? Write to us , we're always hiring for curiosity.</p>`},
+  press:{eyebrow:"Company",title:"Press",lead:"Brand assets, facts and contacts for media.",
+    html:`<h2>At a glance</h2>
+      <ul><li><span class="num">24</span> products across <span class="num">12</span> categories.</li>
+      <li>Instant, client-side search with faceted, parametric filtering , <span class="num">0ms</span> server round-trips.</li>
+      <li>Fully bilingual: English and Arabic with complete right-to-left support.</li></ul>
+      <p>For interviews and brand assets, contact press@voltedge.example.</p>`},
+  privacy:{eyebrow:"Company",title:"Privacy",lead:"Your data stays yours. Here is the short, honest version.",
+    html:`<ul><li>This demonstration store runs entirely in your browser; your cart and language are saved locally on your device (localStorage), not on a server.</li>
+      <li>No account, no tracking, and no third-party advertising cookies.</li>
+      <li>Any checkout details you type are not transmitted anywhere , this is a demo and processes no real payments.</li></ul>`}
+ },
+ ar:{
+  shipping:{eyebrow:"الدعم",title:"الشحن",lead:"توصيل سريع ومتتبَّع عبر المنطقة ، مع شحن مجاني للطلبات التي تتجاوز 500 دولار.",
+    html:`<div class="infocards">
+      <div class="infocard"><h3>قياسي</h3><p>3–5 أيام عمل. 15 دولاراً، أو مجاناً فوق 500 دولار.</p></div>
+      <div class="infocard"><h3>سريع</h3><p>1–2 يوم عمل في المدن الكبرى.</p></div>
+      <div class="infocard"><h3>التتبّع</h3><p>يُرسَل رابط تتبّع بالبريد فور شحن طلبك.</p></div></div>
+      <h2>إلى أين نشحن</h2>
+      <ul><li>مصر والإمارات العربية المتحدة والمملكة العربية السعودية والولايات المتحدة.</li>
+      <li>تُحتسب الرسوم الجمركية، حيثما تنطبق، عند الدفع.</li>
+      <li>الطلبات قبل الثانية ظهراً بتوقيت القاهرة تُجهَّز في اليوم نفسه.</li></ul>
+      <p style="font-size:13px">${UIX.ar.noteDemo}</p>`},
+  returns:{eyebrow:"الدعم",title:"الإرجاع",lead:"غيّرت رأيك؟ أرجِع أي منتج غير مستخدم خلال 30 يوماً.",
+    html:`<ul><li>نافذة إرجاع مدّتها 30 يوماً من تاريخ التسليم.</li>
+      <li>يجب أن يكون المنتج بحالته وعبوته الأصلية.</li>
+      <li>تُرَدّ المبالغ إلى وسيلة الدفع الأصلية خلال 5–7 أيام من الفحص.</li>
+      <li>لبدء الإرجاع، تواصل مع الدعم برقم طلبك (رقم <span class="num">VE-</span> من صفحة الدفع).</li></ul>
+      <p style="font-size:13px">${UIX.ar.noteDemo}</p>`},
+  warranty:{eyebrow:"الدعم",title:"الضمان",lead:"كل جهاز من فولت إيدج مشمول ضد عيوب التصنيع.",
+    html:`<ul><li>ضمان محدود لمدة 12 شهراً قياسياً؛ و24 شهراً على حواسيب وكاميرات مختارة.</li>
+      <li>يغطّي عيوب المواد والتصنيع؛ ويستثني التلف العَرَضي والتلف بالسوائل.</li>
+      <li>تُعالَج المطالبات بالإرسال أو التسليم، مع استبدال مسبق للعناصر المؤهلة.</li></ul>
+      <p style="font-size:13px">${UIX.ar.noteDemo}</p>`},
+  contact:{eyebrow:"الدعم",title:"تواصل معنا",lead:"أشخاص حقيقيون، ولغتان. نردّ عادةً خلال يوم عمل واحد.",
+    html:`<div class="contact-grid">
+      <div class="infocard"><h3>الدعم</h3><p>support@voltedge.example</p></div>
+      <div class="infocard"><h3>المبيعات</h3><p>sales@voltedge.example</p></div>
+      <div class="infocard"><h3>ساعات العمل</h3><p>الأحد–الخميس، 9:00–18:00 (القاهرة)</p></div>
+      <div class="infocard"><h3>التواصل الاجتماعي</h3><p>@voltedge</p></div></div>
+      <p style="font-size:13px">${UIX.ar.noteDemo}</p>`},
+  about:{eyebrow:"الشركة",title:"عن فولت إيدج",lead:"بنينا متجر الإلكترونيات الذي تمنّينا وجوده ، حيث يعمل البحث فعلاً.",
+    html:`<ul><li>وُلد من فكرة بسيطة: شراء التقنية يجب أن يستغرق ثوانٍ، لا عشرين نافذة مفتوحة.</li>
+      <li>كل منتج مُفهرس حسب العلامة التجارية والسعر والتقييم والمواصفات المهمة، لتصل بالتصفية إلى الجهاز المطلوب بالضبط.</li>
+      <li>بُني على «البحث أولاً» وثنائي اللغة (الإنجليزية + العربية) منذ اليوم الأول، لعملاء المنطقة.</li></ul>
+      <p>فولت إيدج هو مرجع البحث والاكتشاف ضمن مجموعة متاجر تشرح الفصل الثامن: أنظمة التجارة الإلكترونية.</p>`},
+  careers:{eyebrow:"الشركة",title:"الوظائف",lead:"ساعدنا في جعل العثور على التقنية المناسبة بلا عناء.",
+    html:`<div class="job"><h3>مهندس واجهات أمامية</h3><div class="loc">عن بُعد / القاهرة</div></div>
+      <div class="job"><h3>مدير منتج ، البحث</h3><div class="loc">القاهرة</div></div>
+      <div class="job"><h3>قائد تجربة عملاء ثنائي اللغة</h3><div class="loc">عن بُعد</div></div>
+      <p>لا ترى دورك؟ راسلنا ، نحن نوظّف الفضول دائماً.</p>`},
+  press:{eyebrow:"الشركة",title:"الصحافة",lead:"أصول العلامة والحقائق وجهات الاتصال للإعلام.",
+    html:`<h2>لمحة سريعة</h2>
+      <ul><li><span class="num">24</span> منتجاً عبر <span class="num">12</span> فئة.</li>
+      <li>بحث فوري من جهة العميل مع تصفية متعددة الأوجه وبارامترية ، <span class="num">0ms</span> اتصال بالخادم.</li>
+      <li>ثنائي اللغة بالكامل: الإنجليزية والعربية مع دعم كامل للكتابة من اليمين لليسار.</li></ul>
+      <p>للمقابلات وأصول العلامة، تواصل press@voltedge.example.</p>`},
+  privacy:{eyebrow:"الشركة",title:"الخصوصية",lead:"بياناتك تبقى لك. وإليك النسخة المختصرة الصادقة.",
+    html:`<ul><li>يعمل هذا المتجر التوضيحي بالكامل داخل متصفحك؛ وتُحفظ سلتك ولغتك محلياً على جهازك (localStorage)، لا على خادم.</li>
+      <li>لا حساب، ولا تتبّع، ولا ملفات تعريف ارتباط إعلانية من أطراف ثالثة.</li>
+      <li>أي بيانات دفع تكتبها لا تُرسَل إلى أي مكان ، فهذا عرض توضيحي ولا يعالج أي مدفوعات حقيقية.</li></ul>`}
+ }
+};
+function renderInfo(slug){
+  const U=UIX[state.lang], P=PAGES[state.lang][slug];
+  const el=document.getElementById("view-page");
+  if(!P){ el.innerHTML=`<a class="backlink" href="#/">${SVG_BACK}${U.backShop}</a><div class="infopage"><h1>404</h1></div>`; return; }
+  el.innerHTML=`<a class="backlink" href="#/">${SVG_BACK}${U.backShop}</a>
+    <div class="infopage"><div class="eyebrow">${P.eyebrow}</div><h1>${P.title}</h1><p class="lead">${P.lead}</p>${P.html}</div>`;
+}
+
+/* ROUTER */
+let _lastRoute="";
+function renderRoute(noScroll){
+  const h=location.hash.replace(/^#\/?/,"");          // "" | "product/v7" | "shipping" | "strategy"
+  if(h==="strategy"){ showView("store"); openPresent(); return; }
+  const parts=h.split("/");
+  if(parts[0]==="product" && parts[1]){ renderDetail(parts[1]); showView("detail"); }
+  else if(PAGE_SLUGS.includes(parts[0])){ renderInfo(parts[0]); showView("page"); }
+  else { showView("store"); }
+  if(!noScroll && h!==_lastRoute) window.scrollTo({top:0});
+  _lastRoute=h;
+}
+
+/* =================== SECRET STRATEGY PRESENTATION =================== */
+const SLIDES={
+ en:[
+  {type:"title",kick:"VoltEdge · E-Commerce Strategy",h:"Answering the <em>E-Commerce Strategy Checklist</em>",p:"Chapter 8 , the seven questions every e-commerce channel must answer, mapped to the live VoltEdge storefront you are standing in.",hint:"Use → ←  (or the dots). Every answer links to the real feature that proves it. Press Esc to return to the store."},
+  {n:1,tag:"Audiences",q:"What audiences are we attempting to reach?",
+   points:["<b>Spec-driven tech buyers</b> who choose by brand, connectivity, price and rating , exactly who the faceted, parametric search is built for.",
+     "<b>Everyday lifestyle shoppers</b> across our 12 categories: audio, mobile, computing, wearables, cameras, drones and accessories , 24 indexed products.",
+     "<b>Bilingual MENA customers</b> , the full Arabic / right-to-left experience targets Egypt and the Gulf, not only English speakers."],
+   proof:[{l:"Try the search",a:"search"},{l:"Open the filters",a:"facets"}]},
+  {n:2,tag:"Action",q:"What action do we want audiences to take?",
+   points:["<b>Primary conversion:</b> search or filter → open a product page → Add to cart → finish the 4-step checkout (Review · Details · Pay · Done).",
+     "<b>Micro-conversions:</b> applying facets, searching and sorting , the engagement signals that prove buying intent.",
+     "<b>Retention:</b> the cart persists between visits, and free shipping over $500 nudges a larger basket."],
+   proof:[{l:"Open a product",a:"product:v7"},{l:"View the cart",a:"cart"}]},
+  {n:3,tag:"Ownership",q:"Who owns the e-commerce channel within the organization?",
+   points:["<b>Digital / merchandising</b> owns the catalog, the category–brand–connectivity taxonomy, pricing and the 'New' / Featured merchandising.",
+     "<b>IT / engineering</b> owns hosting, uptime and performance , here search runs client-side with <b>zero server round-trips</b> , plus checkout security.",
+     "<b>Customer experience</b> owns the Support pages (Shipping, Returns, Warranty, Contact); <b>Marketing</b> owns acquisition and bilingual content. One Head of E-Commerce stays accountable."],
+   proof:[{l:"See the Support pages",a:"page:shipping"}]},
+  {n:4,tag:"Channel mix",q:"Is the e-commerce channel planned alongside other channels?",
+   points:["Yes , a <b>clicks-and-bricks</b> integration (Ch.8): the storefront should sync catalog, pricing and inventory with any physical retail and marketplaces.",
+     "Bilingual EN/AR aligns the online channel with a regional offline presence , one brand, one catalog, two languages.",
+     "<b>Honest scope:</b> today this is a standalone storefront demo; live inventory and accounting integration is the documented roadmap, not yet built."],
+   proof:[{l:"Switch to Arabic",a:"lang"}]},
+  {n:5,tag:"Content process",q:"Is there a process for generating, approving, releasing and withdrawing content?",
+   points:["<b>Generate:</b> product data, specs, imagery and bilingual copy are drafted from one source of truth (a single product catalog).",
+     "<b>Approve → Release:</b> merchandising and translation checks, then publish , new items auto-appear in search and every facet, flagged 'New'.",
+     "<b>Withdraw:</b> discontinued items are pulled or redirected so search results and links never break."],
+   proof:[{l:"See it in the catalog",a:"facets"}]},
+  {n:6,tag:"Brand fit",q:"Will our brand translate to the new channel?",
+   points:["Yes , the promise <b>'find the right tech in seconds, not tabs'</b> IS the product experience: speed, precision, clarity.",
+     "A consistent system: dark/neon 'electric' visuals, the bolt logo, Space Grotesk type , and it reads correctly in Arabic (Cairo font, full RTL mirroring).",
+     "Trust cues at a staged, validated checkout carry the brand all the way to payment."],
+   proof:[{l:"Toggle EN / العربية",a:"lang"}]},
+  {n:7,tag:"Go-to-market",q:"How will we market the channel itself?",
+   points:["<b>SEO:</b> every product and info page now has its own shareable URL , indexable and built for long-tail spec queries ('4K USB-C monitor', 'ANC wireless earbuds').",
+     "<b>The hook is the product:</b> 'search smarter' is both the feature and the campaign message.",
+     "<b>Retention + reach:</b> email capture at checkout for cart-recovery and restock alerts; bilingual content and affiliate placements for high-intent MENA tech buyers."],
+   proof:[{l:"Open a product URL",a:"product:v5"},{l:"Try the search",a:"search"}]},
+  {type:"frame",kick:"Foundation · Chapter 8",h:"Grounded in the Web Store Requirements model",
+   cards:[{t:"BUILD & MARKET",items:["Search-first storefront","Bilingual content (EN/AR)","Own URL per page (SEO)"]},
+     {t:"SERVE & TRANSACT",items:["Faceted catalog search","Cart + 4-step checkout","Free-shipping logic"]},
+     {t:"MANAGE & PROTECT",items:["Single catalog source","Roadmap: analytics + inventory","HTTPS + secure checkout"]}]}
+ ],
+ ar:[
+  {type:"title",kick:"فولت إيدج · استراتيجية التجارة الإلكترونية",h:"الإجابة عن <em>قائمة استراتيجية التجارة الإلكترونية</em>",p:"الفصل الثامن ، الأسئلة السبعة التي يجب أن تجيب عنها أي قناة تجارة إلكترونية، مربوطة بمتجر فولت إيدج الحيّ الذي تتصفّحه الآن.",hint:"استخدم ← → (أو النقاط). كل إجابة مرتبطة بالميزة الحقيقية التي تُثبتها. اضغط Esc للعودة إلى المتجر."},
+  {n:1,tag:"الجمهور",q:"ما الجماهير التي نسعى للوصول إليها؟",
+   points:["<b>مشترو التقنية الباحثون عن المواصفات</b> الذين يختارون حسب العلامة التجارية والاتصال والسعر والتقييم ، وهم تحديداً من بُني لأجلهم البحث المتعدد الأوجه والبارامتري.",
+     "<b>المتسوقون اليوميون</b> عبر فئاتنا الاثنتي عشرة: الصوتيات والمحمول والحوسبة والأجهزة القابلة للارتداء والكاميرات والطائرات بدون طيار والملحقات ، 24 منتجاً مُفهرساً.",
+     "<b>عملاء الشرق الأوسط ثنائيو اللغة</b> ، تجربة عربية كاملة من اليمين لليسار تستهدف مصر والخليج، لا المتحدثين بالإنجليزية فقط."],
+   proof:[{l:"جرّب البحث",a:"search"},{l:"افتح عوامل التصفية",a:"facets"}]},
+  {n:2,tag:"الإجراء",q:"ما الإجراء الذي نريد من الجمهور اتخاذه؟",
+   points:["<b>التحويل الأساسي:</b> ابحث أو صفِّ ← افتح صفحة المنتج ← أضف إلى السلة ← أكمل خطوات الشراء الأربع (مراجعة · بيانات · دفع · تم).",
+     "<b>التحويلات الصغيرة:</b> تطبيق عوامل التصفية والبحث والترتيب ، إشارات التفاعل التي تثبت نية الشراء.",
+     "<b>الاحتفاظ:</b> تبقى السلة محفوظة بين الزيارات، والشحن المجاني فوق 500 دولار يشجّع على سلة أكبر."],
+   proof:[{l:"افتح منتجاً",a:"product:v7"},{l:"اعرض السلة",a:"cart"}]},
+  {n:3,tag:"الملكية",q:"من يملك قناة التجارة الإلكترونية داخل المؤسسة؟",
+   points:["<b>التسويق الرقمي</b> يملك الكتالوج وتصنيف الفئة–العلامة–الاتصال والتسعير وعرض المنتجات المميزة و«الجديد».",
+     "<b>تقنية المعلومات</b> تملك الاستضافة ووقت التشغيل والأداء ، هنا يعمل البحث من جهة العميل <b>بلا أي اتصال بالخادم</b> ، إضافةً إلى أمان الدفع.",
+     "<b>تجربة العميل</b> تملك صفحات الدعم (الشحن، الإرجاع، الضمان، التواصل)؛ و<b>التسويق</b> يملك الاكتساب والمحتوى ثنائي اللغة. ويبقى مسؤول واحد لإدارة التجارة الإلكترونية محاسَباً."],
+   proof:[{l:"شاهد صفحات الدعم",a:"page:shipping"}]},
+  {n:4,tag:"مزيج القنوات",q:"هل القناة مخطّطة جنباً إلى جنب مع القنوات الأخرى؟",
+   points:["نعم ، تكامل <b>النقر والطوب</b> (الفصل 8): ينبغي أن يزامن المتجر الكتالوج والتسعير والمخزون مع أي بيع تجزئة مادي والأسواق الإلكترونية.",
+     "ثنائية اللغة تربط القناة الإلكترونية بالحضور الإقليمي على أرض الواقع ، علامة واحدة، كتالوج واحد، لغتان.",
+     "<b>نطاق صادق:</b> اليوم هذا متجر عرض مستقل؛ وتكامل المخزون والمحاسبة الحيّ هو خارطة الطريق الموثّقة، ولم يُبنَ بعد."],
+   proof:[{l:"بدّل إلى الإنجليزية",a:"lang"}]},
+  {n:5,tag:"عملية المحتوى",q:"هل توجد عملية لإنشاء المحتوى واعتماده ونشره وسحبه؟",
+   points:["<b>الإنشاء:</b> تُصاغ بيانات المنتج والمواصفات والصور والنصوص ثنائية اللغة من مصدر واحد للحقيقة (كتالوج منتجات موحّد).",
+     "<b>الاعتماد ← النشر:</b> مراجعات العرض والترجمة ثم النشر ، تظهر العناصر الجديدة تلقائياً في البحث وكل عوامل التصفية بوسم «جديد».",
+     "<b>السحب:</b> تُسحب العناصر المتوقفة أو يُعاد توجيهها كي لا تنكسر نتائج البحث والروابط أبداً."],
+   proof:[{l:"شاهدها في الكتالوج",a:"facets"}]},
+  {n:6,tag:"ملاءمة العلامة",q:"هل ستنتقل علامتنا إلى القناة الجديدة؟",
+   points:["نعم ، الوعد <b>«اعثر على الجهاز المناسب في ثوانٍ»</b> هو نفسه تجربة المنتج: سرعة ودقة ووضوح.",
+     "نظام بصري متّسق: تصميم داكن بلمسات نيون «كهربائية»، وشعار البرق، وخط Space Grotesk ، ويُقرأ بشكل صحيح بالعربية (خط Cairo، انعكاس كامل من اليمين لليسار).",
+     "إشارات الثقة في شراء متدرّج ومُتحقَّق تحمل العلامة حتى لحظة الدفع."],
+   proof:[{l:"بدّل EN / العربية",a:"lang"}]},
+  {n:7,tag:"خطة التسويق",q:"كيف سنسوّق القناة نفسها؟",
+   points:["<b>تحسين محركات البحث:</b> لكل صفحة منتج وصفحة معلومات الآن رابطها الخاص القابل للمشاركة ، قابل للفهرسة ومبني لاستعلامات المواصفات الطويلة («شاشة 4K بمنفذ USB-C»، «سماعات لاسلكية بعزل ضوضاء»).",
+     "<b>الجاذبية هي المنتج نفسه:</b> «ابحث بذكاء» ميزة ورسالة تسويقية في آنٍ واحد.",
+     "<b>الاحتفاظ والوصول:</b> التقاط البريد عند الدفع لاسترداد السلة وتنبيهات التوفّر؛ ومحتوى ثنائي اللغة وشراكات تابعة لمشتري التقنية ذوي النية العالية في المنطقة."],
+   proof:[{l:"افتح رابط منتج",a:"product:v5"},{l:"جرّب البحث",a:"search"}]},
+  {type:"frame",kick:"الأساس · الفصل الثامن",h:"مبني على نموذج «متطلبات متجر الويب»",
+   cards:[{t:"البناء والتسويق",items:["متجر قائم على البحث","محتوى ثنائي اللغة","رابط خاص لكل صفحة (SEO)"]},
+     {t:"الخدمة والمعاملات",items:["بحث متعدد الأوجه","سلة + شراء بأربع خطوات","منطق الشحن المجاني"]},
+     {t:"الإدارة والحماية",items:["مصدر كتالوج واحد","خارطة: تحليلات + مخزون","HTTPS + دفع آمن"]}]}
+ ]
+};
+let pIdx=0, pLang="en", P_TOTAL=0;
+function openPresent(){
+  const el=document.getElementById("present");
+  if(el.classList.contains("open")) return;
+  pLang=state.lang; pIdx=0;
+  el.classList.add("open"); el.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+  buildPresent();
+}
+function closePresent(){
+  const el=document.getElementById("present");
+  el.classList.remove("open"); el.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+  if(location.hash.replace(/^#\/?/,"")==="strategy") location.hash="#/";
+}
+function presLang(){ pLang = pLang==="ar"?"en":"ar"; buildPresent(); }
+function syncPresentLang(){ const el=document.getElementById("present"); if(el && el.classList.contains("open")){ pLang=state.lang; buildPresent(); } }
+function presGo(d){ const n=pIdx+d; if(n<0||n>=P_TOTAL) return; pIdx=n; showSlide(); }
+function presDot(i){ pIdx=i; showSlide(); }
+function buildPresent(){
+  const SL=SLIDES[pLang]; P_TOTAL=SL.length;
+  const el=document.getElementById("present");
+  el.dir = pLang==="ar"?"rtl":"ltr";
+  document.getElementById("pLangLabel").textContent = pLang==="ar"?"English":"العربية";
+  document.getElementById("pExit").textContent = pLang==="ar"?"خروج":"Exit";
+  document.getElementById("pTitle").textContent = pLang==="ar"?"وضع الاستراتيجية":"Strategy Mode";
+  document.getElementById("pStage").innerHTML = SL.map((s,i)=>slideHTML(s,i)).join("");
+  document.getElementById("pDots").innerHTML = SL.map((s,i)=>`<span class="pdot" onclick="presDot(${i})"></span>`).join("");
+  if(pIdx>=P_TOTAL) pIdx=P_TOTAL-1;
+  showSlide();
+}
+function slideHTML(s,i){
+  if(s.type==="title")
+    return `<div class="pslide title-slide" data-i="${i}"><span class="pkick">${s.kick}</span><h1>${s.h}</h1><p>${s.p}</p><p class="hint">${s.hint}</p></div>`;
+  if(s.type==="frame")
+    return `<div class="pslide" data-i="${i}"><span class="pkick">${s.kick}</span><h2>${s.h}</h2><div class="framegrid">${s.cards.map(c=>`<div class="framecard"><h3>${c.t}</h3>${c.items.map(x=>`<span>${x}</span>`).join("")}</div>`).join("")}</div></div>`;
+  const proofLbl = pLang==="ar"?"إثبات حيّ على الموقع":"Live proof on this site";
+  return `<div class="pslide" data-i="${i}">
+    <span class="pkick"><span class="qn">${s.n}</span> ${s.tag}</span>
+    <h2>${s.q}</h2>
+    <ul>${s.points.map(p=>`<li>${p}</li>`).join("")}</ul>
+    ${s.proof&&s.proof.length?`<div class="proofrow"><span class="lbl">${proofLbl}</span>${s.proof.map(pr=>`<button class="proofchip" onclick="presProof('${pr.a}')">${pr.l} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></button>`).join("")}</div>`:''}
+  </div>`;
+}
+function showSlide(){
+  document.querySelectorAll("#pStage .pslide").forEach(el=>el.classList.toggle("show",+el.dataset.i===pIdx));
+  document.querySelectorAll("#pDots .pdot").forEach((d,i)=>d.classList.toggle("on",i===pIdx));
+  document.getElementById("pPrev").disabled = pIdx===0;
+  document.getElementById("pNext").disabled = pIdx===P_TOTAL-1;
+  document.getElementById("pCounter").textContent = (pIdx+1)+" / "+P_TOTAL;
+  document.getElementById("pprogress").style.width = (P_TOTAL>1?(pIdx/(P_TOTAL-1)*100):100)+"%";
+}
+function presProof(action){
+  const [a,arg]=action.split(":");
+  closePresent();
+  setTimeout(()=>{
+    if(a==="search"){ const s=document.getElementById("search"); window.scrollTo({top:0,behavior:"smooth"}); s.focus(); flash(s.closest(".searchbar")); }
+    else if(a==="facets"){ const f=document.getElementById("facets"); if(window.innerWidth<=1000){f.classList.add("open");} else {f.scrollIntoView({behavior:"smooth",block:"center"});} flash(f.querySelector(".facet")); }
+    else if(a==="cart"){ openCart(); }
+    else if(a==="product"){ openProduct(arg||"v7"); }
+    else if(a==="page"){ location.hash="#/"+arg; }
+    else if(a==="lang"){ window.scrollTo({top:0}); toggleLang(); }
+  },430);
+}
+function flash(el){ if(!el||!el.animate) return; el.animate([{boxShadow:"0 0 0 0 rgba(46,230,214,0)"},{boxShadow:"0 0 0 5px rgba(46,230,214,.65)"},{boxShadow:"0 0 0 0 rgba(46,230,214,0)"}],{duration:1300,iterations:2}); }
+/* presentation keyboard nav */
+document.addEventListener("keydown",e=>{
+  if(!document.getElementById("present").classList.contains("open")) return;
+  if(e.key==="ArrowRight"||e.key===" "||e.key==="PageDown"){ presGo(pLang==="ar"?-1:1); e.preventDefault(); }
+  else if(e.key==="ArrowLeft"||e.key==="PageUp"){ presGo(pLang==="ar"?1:-1); e.preventDefault(); }
+  else if(e.key==="Escape"){ closePresent(); }
+});
+
+/* =================== CHAT ASSISTANT =================== */
+/* Calls Mistral AI directly from the browser (no backend), same pattern as
+   amsamms.github.io/web_apps. NOTE: the key below is visible in page source. */
+const MISTRAL_KEY   = "mnmKw0OPPoClTcjqaOpJDGO4ZLJLH93M";
+const MISTRAL_URL   = "https://api.mistral.ai/v1/chat/completions";
+const MISTRAL_MODEL = "mistral-small-latest";   // capable + cheap, clean formatting
+const BOT_READY = !!MISTRAL_KEY;
+
+/* persona + strict formatting rules for professional, well-structured replies */
+function chatSystemPrompt(){
+  const lang = state.lang==="ar" ? "Arabic" : "English";
+  return `You are the VoltEdge Electronics shopping assistant on a search-first consumer-electronics storefront.
+Help visitors with product discovery, recommendations, specs, comparisons, prices, and support (shipping, returns, warranty, contact).
+
+REPLY LANGUAGE: Always reply in ${lang} (match the shopper's current language).
+
+FORMATTING (very important , answers must look clean and professional):
+- Open with one short sentence.
+- When listing products, use a bullet list. Each bullet: **Product Name** , $price , then one short reason or key spec.
+- Use **bold** for product names and prices. Keep the whole answer under ~90 words.
+- End with a brief, friendly nudge (e.g. offer to compare or filter).
+- Plain text only with markdown **bold** and "- " bullets. No tables, no headings, no emojis.
+
+RULES:
+- Use ONLY the catalog and policies provided below. Never invent products, prices, specs, or policies.
+- If something isn't in the data, say so briefly and point to the Contact page.
+- For unrelated questions, answer in one line and steer back to the store.
+
+===== VOLTEDGE DATA =====
+${botContext()}`;
+}
+
+const CHAT_T = {
+  en:{ fab:"Ask VoltEdge", title:"VoltEdge Assistant", online:"Online , powered by Mistral AI", setup:"Assistant warming up",
+       ph:"Ask about products, shipping, returns...",
+       greet:"Hi! I'm the VoltEdge assistant. Ask me about any product, or about shipping, returns and warranty , in English or Arabic.",
+       sugg:["Best wireless headphones?","Phones under $600","What is your return policy?"],
+       err:"Sorry, I couldn't reach the assistant just now. Please try again.",
+       offline:"The assistant isn't connected yet. Once setup is finished it will answer here , meanwhile, browse the catalog or check the Support pages." },
+  ar:{ fab:"اسأل فولت إيدج", title:"مساعد فولت إيدج", online:"متصل , مدعوم بـ Mistral AI", setup:"يجري تجهيز المساعد",
+       ph:"اسأل عن المنتجات أو الشحن أو الإرجاع...",
+       greet:"مرحباً! أنا مساعد فولت إيدج. اسألني عن أي منتج، أو عن الشحن والإرجاع والضمان , بالعربية أو الإنجليزية.",
+       sugg:["أفضل سماعات لاسلكية؟","هواتف بأقل من 600 دولار","ما سياسة الإرجاع؟"],
+       err:"عذراً، تعذّر الوصول إلى المساعد الآن. حاول مرة أخرى.",
+       offline:"المساعد غير متصل بعد. بمجرد انتهاء الإعداد سيجيب هنا , في الأثناء تصفّح الكتالوج أو صفحات الدعم." }
+};
+let chatHist=[];               // API history: [{role:'user'|'assistant', content}]
+let chatOpen=false, chatBusy=false, chatGreeted=false;
+
+/* compact, single-source-of-truth context sent to the bot each turn */
+function botContext(){
+  const cat = PRODUCTS.map(p=>`- ${p.name} | ${p.brand} | ${p.cat} | $${p.price} | ${p.rating}/5 | ${p.conn} | ${Object.entries(p.specs).map(([k,v])=>k+":"+v).join(", ")}`).join("\n");
+  const pol = `Shipping: standard 3-5 business days, $15 flat or FREE over $500; express 1-2 days in major cities; ships to Egypt, UAE, Saudi Arabia, USA.
+Returns: 30-day window from delivery, item in original condition, refund to original method in 5-7 days.
+Warranty: 12-month limited standard (24 months on selected laptops and cameras); excludes accidental and liquid damage.
+Contact: support@voltedge.example, sales@voltedge.example, hours Sun-Thu 9:00-18:00 Cairo.`;
+  return `STORE: VoltEdge , search-first consumer-electronics marketplace. 24 products across 12 categories. Prices in USD.
+The shopper is currently viewing the site in ${state.lang==="ar"?"ARABIC":"ENGLISH"}.
+
+CATALOG:
+${cat}
+
+POLICIES:
+${pol}`;
+}
+
+function applyChatLang(){
+  const c=CHAT_T[state.lang];
+  document.getElementById("chatFabLabel").textContent=c.fab;
+  document.getElementById("chatTitle").textContent=c.title;
+  document.getElementById("chatStatus").textContent= BOT_READY? c.online : c.setup;
+  document.getElementById("chatInput").placeholder=c.ph;
+  renderSugg();
+}
+function renderSugg(){
+  const c=CHAT_T[state.lang];
+  const show = chatGreeted && chatHist.length===0;
+  document.getElementById("chatSugg").innerHTML = show ? c.sugg.map(s=>`<button onclick="quickAsk(this.textContent)">${s}</button>`).join("") : "";
+}
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById("chatPanel").classList.toggle("open",chatOpen);
+  document.getElementById("chatFab").style.display = chatOpen? "none":"flex";
+  if(chatOpen && !chatGreeted){ chatGreeted=true; bubble("bot",CHAT_T[state.lang].greet); renderSugg(); }
+  if(chatOpen) setTimeout(()=>document.getElementById("chatInput").focus(),60);
+}
+function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+/* lightweight, safe markdown: escapes first, then **bold**, bullet/numbered lists,
+   paragraphs, and turns any product name it finds into a link to its page */
+function mdToHtml(t){
+  let s=esc(t).replace(/\*\*([^*\n]+)\*\*/g,"<strong>$1</strong>");
+  const lines=s.split(/\n/); let html="",ul=false,ol=false;
+  const close=()=>{ if(ul){html+="</ul>";ul=false;} if(ol){html+="</ol>";ol=false;} };
+  for(const raw of lines){
+    const line=raw.trim();
+    if(!line){ close(); continue; }
+    let m;
+    if(m=line.match(/^[-*•]\s+(.*)/)){ if(!ul){close();html+="<ul>";ul=true;} html+="<li>"+m[1]+"</li>"; }
+    else if(m=line.match(/^\d+[.)]\s+(.*)/)){ if(!ol){close();html+="<ol>";ol=true;} html+="<li>"+m[1]+"</li>"; }
+    else { close(); html+="<p>"+line+"</p>"; }
+  }
+  close();
+  return linkProducts(html);
+}
+/* link bolded product names to their detail page */
+function linkProducts(html){
+  PRODUCTS.forEach(p=>{
+    [p.name,p.nameAr].forEach(nm=>{
+      if(!nm) return;
+      const safe=esc(nm).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+      html=html.replace(new RegExp("<strong>"+safe+"</strong>","g"),
+        `<a class="plink" href="#/product/${p.id}" onclick="if(chatOpen)toggleChat()"><strong>${esc(nm)}</strong></a>`);
+    });
+  });
+  return html;
+}
+function bubble(side,text){
+  const body=document.getElementById("chatBody");
+  const div=document.createElement("div");
+  div.className="msg "+(side==="me"?"me":"bot");
+  div.innerHTML = side==="me" ? esc(text) : mdToHtml(text);
+  body.appendChild(div); body.scrollTop=body.scrollHeight;
+  return div;
+}
+function autoGrow(el){ el.style.height="auto"; el.style.height=Math.min(el.scrollHeight,90)+"px"; }
+function chatKey(e){ if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); sendChat(); } }
+function quickAsk(t){ document.getElementById("chatInput").value=t; sendChat(); }
+async function sendChat(){
+  const input=document.getElementById("chatInput");
+  const text=input.value.trim();
+  if(!text || chatBusy) return;
+  const c=CHAT_T[state.lang];
+  bubble("me",text); input.value=""; autoGrow(input);
+  document.getElementById("chatSugg").innerHTML="";
+  chatHist.push({role:"user",content:text});
+  if(!BOT_READY){ bubble("bot",c.offline); return; }
+  chatBusy=true; const sendBtn=document.getElementById("chatSend"); sendBtn.disabled=true;
+  const body=document.getElementById("chatBody");
+  const typing=document.createElement("div"); typing.className="chat-typing"; typing.innerHTML="<span></span><span></span><span></span>";
+  body.appendChild(typing); body.scrollTop=body.scrollHeight;
+  try{
+    const messages=[{role:"system",content:chatSystemPrompt()},...chatHist.slice(-10)];
+    const r=await fetch(MISTRAL_URL,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+MISTRAL_KEY },
+      body:JSON.stringify({ model:MISTRAL_MODEL, messages, temperature:0.2, max_tokens:500 })
+    });
+    const data=await r.json().catch(()=>({}));
+    typing.remove();
+    const reply=(data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
+      ? data.choices[0].message.content.trim() : c.err;
+    bubble("bot",reply);
+    if(reply!==c.err) chatHist.push({role:"assistant",content:reply});
+  }catch(e){ typing.remove(); bubble("bot",c.err); }
+  finally{ chatBusy=false; sendBtn.disabled=false; }
+}
 
 /* init */
 buildFacets();render();renderCart();updateCount();
 setLang(localStorage.getItem("volt_lang")==="ar" ? "ar" : "en");
+window.addEventListener("hashchange",()=>renderRoute());
+renderRoute();
 </script>
 </body>
 </html>
