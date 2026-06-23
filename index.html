@@ -423,6 +423,7 @@ footer a:hover{color:var(--neon)}
 [dir=rtl] .chat-head .ht small .dot{margin-right:0;margin-left:5px}
 .chat-head .cx{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:var(--muted);font-size:19px}
 .chat-head .cx:hover{background:var(--panel);color:var(--ink)}
+.chat-head .cx svg{width:17px;height:17px}
 .chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:11px}
 .msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.55;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
 .msg.bot{align-self:flex-start;background:var(--panel);border:1px solid var(--line);border-bottom-left-radius:5px}
@@ -453,6 +454,14 @@ footer a:hover{color:var(--neon)}
 .msg.bot strong{color:var(--neon);font-weight:700}
 .msg.bot a.plink{color:var(--neon);font-weight:600;text-decoration:none;border-bottom:1px dashed var(--neon-dim)}
 .msg.bot a.plink:hover{border-bottom-style:solid}
+/* floating "back to presentation" pill (shown after a live-proof jump) */
+.pres-resume{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:110;display:none;align-items:center;gap:8px;background:var(--bg2);border:1.5px solid var(--neon);color:var(--ink);font-weight:600;font-size:13.5px;padding:8px 8px 8px 16px;border-radius:30px;box-shadow:0 16px 44px -12px rgba(46,230,214,.55)}
+.pres-resume.show{display:flex;animation:fade .3s both}
+.pres-resume .rsm{display:inline-flex;align-items:center;gap:8px;color:#04222a;background:var(--neon);border-radius:30px;padding:9px 15px;font-weight:700;font-size:13.5px}
+.pres-resume .rsm svg{width:15px;height:15px}
+[dir=rtl] .pres-resume .rsm svg{transform:scaleX(-1)}
+.pres-resume .dz{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:var(--muted);font-size:18px}
+.pres-resume .dz:hover{background:var(--panel);color:var(--ink)}
 @media(max-width:480px){.chat-panel{height:calc(100vh - 24px);bottom:12px;right:12px}[dir=rtl] .chat-panel{left:12px}.chat-fab span{display:none}.chat-fab{padding:14px}}
 </style>
 </head>
@@ -614,6 +623,12 @@ footer a:hover{color:var(--neon)}
   </div>
 </div>
 
+<!-- back-to-presentation pill (after a live-proof jump) -->
+<div class="pres-resume" id="presResume">
+  <button class="rsm" onclick="resumePresent()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg><span id="presResumeLabel">Back to presentation</span></button>
+  <button class="dz" onclick="dismissResume()" aria-label="Dismiss">&times;</button>
+</div>
+
 <!-- chat assistant -->
 <button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Open assistant">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"/></svg>
@@ -623,6 +638,7 @@ footer a:hover{color:var(--neon)}
   <div class="chat-head">
     <span class="av"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>
     <div class="ht"><b id="chatTitle">VoltEdge Assistant</b><small><span class="dot"></span><span id="chatStatus">Online</span></small></div>
+    <button class="cx" id="chatReset" onclick="resetChat()" aria-label="Reset chat" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg></button>
     <button class="cx" onclick="toggleChat()" aria-label="Close">&times;</button>
   </div>
   <div class="chat-body" id="chatBody"></div>
@@ -1277,7 +1293,7 @@ function renderRoute(noScroll){
 /* =================== SECRET STRATEGY PRESENTATION =================== */
 const SLIDES={
  en:[
-  {type:"title",kick:"VoltEdge · E-Commerce Strategy",h:"Answering the <em>E-Commerce Strategy Checklist</em>",p:"Chapter 8 , the seven questions every e-commerce channel must answer, mapped to the live VoltEdge storefront you are standing in.",hint:"Use → ←  (or the dots). Every answer links to the real feature that proves it. Press Esc to return to the store."},
+  {type:"title",kick:"VoltEdge · E-Commerce Strategy",h:"Answering the <em>E-Commerce Strategy Checklist</em>",p:"Chapter 8 , the seven questions every e-commerce channel must answer, mapped to the live VoltEdge storefront you are standing in.",hint:"Use → ←  (or the dots). Tap a proof to jump to the live feature, then click “Back to presentation” to return to this slide. Esc exits."},
   {n:1,tag:"Audiences",q:"What audiences are we attempting to reach?",
    points:["<b>Spec-driven tech buyers</b> who choose by brand, connectivity, price and rating , exactly who the faceted, parametric search is built for.",
      "<b>Everyday lifestyle shoppers</b> across our 12 categories: audio, mobile, computing, wearables, cameras, drones and accessories , 24 indexed products.",
@@ -1319,7 +1335,7 @@ const SLIDES={
      {t:"MANAGE & PROTECT",items:["Single catalog source","Roadmap: analytics + inventory","HTTPS + secure checkout"]}]}
  ],
  ar:[
-  {type:"title",kick:"فولت إيدج · استراتيجية التجارة الإلكترونية",h:"الإجابة عن <em>قائمة استراتيجية التجارة الإلكترونية</em>",p:"الفصل الثامن ، الأسئلة السبعة التي يجب أن تجيب عنها أي قناة تجارة إلكترونية، مربوطة بمتجر فولت إيدج الحيّ الذي تتصفّحه الآن.",hint:"استخدم ← → (أو النقاط). كل إجابة مرتبطة بالميزة الحقيقية التي تُثبتها. اضغط Esc للعودة إلى المتجر."},
+  {type:"title",kick:"فولت إيدج · استراتيجية التجارة الإلكترونية",h:"الإجابة عن <em>قائمة استراتيجية التجارة الإلكترونية</em>",p:"الفصل الثامن ، الأسئلة السبعة التي يجب أن تجيب عنها أي قناة تجارة إلكترونية، مربوطة بمتجر فولت إيدج الحيّ الذي تتصفّحه الآن.",hint:"استخدم ← → (أو النقاط). اضغط على «إثبات» للانتقال إلى الميزة الحقيقية، ثم انقر «العودة إلى العرض» للرجوع إلى الشريحة نفسها. وEsc للخروج."},
   {n:1,tag:"الجمهور",q:"ما الجماهير التي نسعى للوصول إليها؟",
    points:["<b>مشترو التقنية الباحثون عن المواصفات</b> الذين يختارون حسب العلامة التجارية والاتصال والسعر والتقييم ، وهم تحديداً من بُني لأجلهم البحث المتعدد الأوجه والبارامتري.",
      "<b>المتسوقون اليوميون</b> عبر فئاتنا الاثنتي عشرة: الصوتيات والمحمول والحوسبة والأجهزة القابلة للارتداء والكاميرات والطائرات بدون طيار والملحقات ، 24 منتجاً مُفهرساً.",
@@ -1374,7 +1390,30 @@ function closePresent(){
   const el=document.getElementById("present");
   el.classList.remove("open"); el.setAttribute("aria-hidden","true");
   document.body.style.overflow="";
-  if(location.hash.replace(/^#\/?/,"")==="strategy") location.hash="#/";
+  document.getElementById("presResume").classList.remove("show");
+  if(location.hash.replace(/^#\/?/,"")!=="") location.hash="#/";   // exit always returns to the store
+}
+/* minimize the deck to reveal a live-proof feature, keeping the current slide */
+let presReturnIdx=0;
+function minimizePresent(){
+  const el=document.getElementById("present");
+  presReturnIdx=pIdx;
+  el.classList.remove("open"); el.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+  document.getElementById("presResumeLabel").textContent = pLang==="ar"?"العودة إلى العرض":"Back to presentation";
+  document.getElementById("presResume").classList.add("show");
+}
+function resumePresent(){
+  document.getElementById("presResume").classList.remove("show");
+  const el=document.getElementById("present");
+  pIdx=presReturnIdx;
+  el.classList.add("open"); el.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+  buildPresent();                       // re-render at the remembered slide
+}
+function dismissResume(){
+  document.getElementById("presResume").classList.remove("show");
+  if(location.hash.replace(/^#\/?/,"")!=="") location.hash="#/";
 }
 function presLang(){ pLang = pLang==="ar"?"en":"ar"; buildPresent(); }
 function syncPresentLang(){ const el=document.getElementById("present"); if(el && el.classList.contains("open")){ pLang=state.lang; buildPresent(); } }
@@ -1415,7 +1454,7 @@ function showSlide(){
 }
 function presProof(action){
   const [a,arg]=action.split(":");
-  closePresent();
+  minimizePresent();
   setTimeout(()=>{
     if(a==="search"){ const s=document.getElementById("search"); window.scrollTo({top:0,behavior:"smooth"}); s.focus(); flash(s.closest(".searchbar")); }
     else if(a==="facets"){ const f=document.getElementById("facets"); if(window.innerWidth<=1000){f.classList.add("open");} else {f.scrollIntoView({behavior:"smooth",block:"center"});} flash(f.querySelector(".facet")); }
@@ -1557,6 +1596,13 @@ function bubble(side,text){
   div.innerHTML = side==="me" ? esc(text) : mdToHtml(text);
   body.appendChild(div); body.scrollTop=body.scrollHeight;
   return div;
+}
+function resetChat(){
+  chatHist=[]; chatBusy=false;
+  document.getElementById("chatBody").innerHTML="";
+  const inp=document.getElementById("chatInput"); inp.value=""; autoGrow(inp);
+  bubble("bot",CHAT_T[state.lang].greet);   // back to default greeting
+  renderSugg();                              // restore the default suggestion chips
 }
 function autoGrow(el){ el.style.height="auto"; el.style.height=Math.min(el.scrollHeight,90)+"px"; }
 function chatKey(e){ if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); sendChat(); } }
