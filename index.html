@@ -145,7 +145,11 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:44px 0 28p
 footer h4{font-family:"Space Grotesk";font-size:15px;margin-bottom:12px;color:var(--ink)}
 footer a{display:block;color:var(--muted);font-size:14px;padding:4px 0}
 footer a:hover{color:var(--neon)}
-.fbottom{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-size:12.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.flegal{border-top:1px solid var(--line);margin-top:30px;padding-top:16px;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.flegal svg{width:15px;height:15px;color:var(--teal);flex-shrink:0}
+.flegal .sep{color:var(--line)}
+.flegal .demo{color:var(--faint)}
+.fbottom{border-top:1px solid var(--line);margin-top:18px;padding-top:18px;font-size:12.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 /* mobile facet toggle */
 .facet-toggle{display:none}
@@ -319,6 +323,45 @@ footer a:hover{color:var(--neon)}
 .related h2{font-size:22px;margin:48px 0 18px}
 .related .grid{margin-top:0}
 @media(max-width:760px){.pdp{grid-template-columns:1fr;gap:24px}}
+
+/* ===== product reviews ===== */
+.reviews{margin:52px 0 0}
+.reviews h2{font-size:23px;margin-bottom:20px}
+.rv-stars{display:inline-flex;gap:2px;letter-spacing:1px;line-height:1}
+.rv-stars span{font-size:15px}
+.rv-stars span.on{color:var(--neon)}
+.rv-stars span.off{color:var(--line)}
+.rv-summary{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;margin-bottom:26px}
+.rv-score{text-align:center;flex-shrink:0}
+.rv-big{font-family:"Space Grotesk";font-weight:700;font-size:52px;line-height:1;color:var(--ink)}
+.rv-score .rv-stars{margin:8px 0 6px}
+.rv-score .rv-stars span{font-size:17px}
+.rv-count{font-size:13px;color:var(--faint)}
+.rv-bars{display:flex;flex-direction:column;gap:7px;min-width:0}
+.rv-bar{display:flex;align-items:center;gap:11px;font-size:13px;color:var(--muted)}
+.rv-bl{display:inline-flex;align-items:center;gap:2px;width:30px;color:var(--faint)}
+.rv-track{flex:1;height:8px;background:var(--bg2);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.rv-fill{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--neon));border-radius:5px}
+.rv-bp{width:38px;text-align:right;color:var(--faint)}
+[dir=rtl] .rv-bp{text-align:left}
+.rv-list{display:flex;flex-direction:column;gap:14px}
+.rv-card{display:flex;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.rv-ava{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-family:"Space Grotesk";font-weight:700;font-size:17px;color:#04222a;background:linear-gradient(135deg,var(--neon),var(--teal))}
+.rv-main{flex:1;min-width:0}
+.rv-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:5px}
+.rv-top b{font-size:14.5px;color:var(--ink)}
+.rv-vf{font-size:11px;font-weight:700;color:var(--neon);background:rgba(46,230,214,.10);border:1px solid var(--neon-dim);border-radius:30px;padding:2px 9px}
+.rv-date{font-size:12px;color:var(--faint);margin-left:auto}
+[dir=rtl] .rv-date{margin-left:0;margin-right:auto}
+.rv-main .rv-stars{margin-bottom:7px}
+.rv-text{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
+.rv-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px}
+.rv-write{padding:11px 20px;font-size:14px}
+.rv-note{font-size:12.5px;color:var(--faint)}
+@media(max-width:560px){
+  .rv-summary{grid-template-columns:1fr;gap:20px;text-align:center}
+  .rv-bars{max-width:340px;margin:0 auto;width:100%}
+}
 
 /* info pages */
 .infopage{max-width:760px}
@@ -581,6 +624,10 @@ footer a:hover{color:var(--neon)}
       <div><h4 data-i18n="footSupport">Support</h4><a href="#/shipping" data-i18n="footShipping">Shipping</a><a href="#/returns" data-i18n="footReturns">Returns</a><a href="#/warranty" data-i18n="footWarranty">Warranty</a><a href="#/contact" data-i18n="footContact">Contact</a></div>
       <div><h4 data-i18n="footCompany">Company</h4><a href="#/about" data-i18n="footAbout">About</a><a href="#/careers" data-i18n="footCareers">Careers</a><a href="#/press" data-i18n="footPress">Press</a><a href="#/privacy" data-i18n="footPrivacy">Privacy</a></div>
     </div>
+    <div class="flegal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+      <span data-i18n-html="footLegal">Commercial Registration <span class="num">12345&#8209;678</span> &middot; Tax Card <span class="num">200&#8209;987&#8209;654</span> &middot; VoltEdge Electronics Trading <span class="demo">(illustrative numbers, demo storefront)</span></span>
+    </div>
     <div class="fbottom">
       <span data-i18n="footCopy">&copy; 2024 VoltEdge. A demonstration storefront.</span>
       <span data-i18n="footNote">Instant client-side search and faceted filtering</span>
@@ -742,6 +789,7 @@ const T = {
     footShop:"Shop", footAudio:"Audio", footComputing:"Computing", footMobile:"Mobile", footAccessories:"Accessories",
     footSupport:"Support", footShipping:"Shipping", footReturns:"Returns", footWarranty:"Warranty", footContact:"Contact",
     footCompany:"Company", footAbout:"About", footCareers:"Careers", footPress:"Press", footPrivacy:"Privacy",
+    footLegal:`Commercial Registration <span class="num">12345&#8209;678</span> &middot; Tax Card <span class="num">200&#8209;987&#8209;654</span> &middot; VoltEdge Electronics Trading <span class="demo">(illustrative numbers, demo storefront)</span>`,
     footCopy:"© 2024 VoltEdge. A demonstration storefront.", footNote:"Instant client-side search and faceted filtering"
   },
   ar:{
@@ -776,6 +824,7 @@ const T = {
     footShop:"تسوق", footAudio:"الصوتيات", footComputing:"الحوسبة", footMobile:"المحمول", footAccessories:"الملحقات",
     footSupport:"الدعم", footShipping:"الشحن", footReturns:"الإرجاع", footWarranty:"الضمان", footContact:"اتصل بنا",
     footCompany:"الشركة", footAbout:"من نحن", footCareers:"الوظائف", footPress:"الصحافة", footPrivacy:"الخصوصية",
+    footLegal:`سجل تجاري <span class="num">12345&#8209;678</span> &middot; بطاقة ضريبية <span class="num">200&#8209;987&#8209;654</span> &middot; فولت إيدج لتجارة الإلكترونيات <span class="demo">(أرقام توضيحية، متجر عرض)</span>`,
     footCopy:"© 2024 فولت إيدج. متجر للعرض التوضيحي.", footNote:"بحث فوري من جهة العميل وتصفية متعددة الأوجه"
   }
 };
@@ -1095,8 +1144,8 @@ const SVG_PLUS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 
 /* small label set for product + info pages */
 const UIX = {
-  en:{home:"Home",addCart:"Add to cart",buyNow:"Buy now",specs:"Specifications",related:"You may also like",connectivity:"Connectivity",backShop:"Back to store",noteDemo:"This is a demonstration storefront; the details shown are illustrative."},
-  ar:{home:"الرئيسية",addCart:"أضف إلى السلة",buyNow:"اشترِ الآن",specs:"المواصفات",related:"قد يعجبك أيضاً",connectivity:"الاتصال",backShop:"العودة إلى المتجر",noteDemo:"هذا متجر عرض توضيحي؛ والتفاصيل المعروضة توضيحية."}
+  en:{home:"Home",addCart:"Add to cart",buyNow:"Buy now",specs:"Specifications",related:"You may also like",connectivity:"Connectivity",backShop:"Back to store",noteDemo:"This is a demonstration storefront; the details shown are illustrative.",reviewsTitle:"Customer reviews",basedOn:"Based on",reviewsWord:"reviews",verified:"Verified purchase",writeReview:"Write a review",reviewDemo:"Reviews are illustrative for this demonstration storefront."},
+  ar:{home:"الرئيسية",addCart:"أضف إلى السلة",buyNow:"اشترِ الآن",specs:"المواصفات",related:"قد يعجبك أيضاً",connectivity:"الاتصال",backShop:"العودة إلى المتجر",noteDemo:"هذا متجر عرض توضيحي؛ والتفاصيل المعروضة توضيحية.",reviewsTitle:"تقييمات العملاء",basedOn:"بناءً على",reviewsWord:"تقييم",verified:"شراء موثَّق",writeReview:"اكتب تقييماً",reviewDemo:"التقييمات توضيحية لمتجر العرض هذا."}
 };
 
 /* generated bilingual product description */
@@ -1106,6 +1155,80 @@ function describe(p){
     return `تعرّف على <b>${pName(p)}</b> من ${p.brand} ، ${catLabel(p.cat)} مصمّم للاستخدام عبر ${connLabel(p.conn)}. أبرز المواصفات: ${specs}. وبتقييم ${p.rating.toFixed(1)} نجمة، فهو من أكثر منتجات ${catLabel(p.cat)} بحثاً على فولت إيدج.`;
   return `Meet the <b>${pName(p)}</b> from ${p.brand} , a ${catLabel(p.cat).toLowerCase()} device built for ${connLabel(p.conn)} use. Key specs: ${specs}. With a ${p.rating.toFixed(1)}-star rating, it's one of VoltEdge's most-searched ${catLabel(p.cat).toLowerCase()}.`;
 }
+
+/* ===== product reviews (deterministic, seeded per product, bilingual) ===== */
+const RV_NAMES=[{en:"Omar H.",ar:"عمر ح."},{en:"Sara M.",ar:"سارة م."},{en:"Khaled A.",ar:"خالد ع."},{en:"Mariam T.",ar:"مريم ت."},{en:"Youssef N.",ar:"يوسف ن."},{en:"Layla F.",ar:"ليلى ف."},{en:"Ahmed S.",ar:"أحمد س."},{en:"Nour K.",ar:"نور ك."},{en:"Hassan R.",ar:"حسن ر."},{en:"Dina G.",ar:"دينا ج."},{en:"Tarek B.",ar:"طارق ب."},{en:"Salma W.",ar:"سلمى و."},{en:"Karim D.",ar:"كريم د."},{en:"Hana Z.",ar:"هنا ز."},{en:"Mostafa E.",ar:"مصطفى إ."},{en:"Reem Q.",ar:"ريم ق."}];
+const RV_DATES=[{en:"5 days ago",ar:"منذ 5 أيام"},{en:"1 week ago",ar:"منذ أسبوع"},{en:"2 weeks ago",ar:"منذ أسبوعين"},{en:"3 weeks ago",ar:"منذ 3 أسابيع"},{en:"1 month ago",ar:"منذ شهر"},{en:"2 months ago",ar:"منذ شهرين"}];
+const RV_POS=[
+  {en:"Exactly what I needed. Setup was painless and it works flawlessly.",ar:"تماماً ما احتجته. الإعداد كان سهلاً ويعمل بلا أي مشاكل."},
+  {en:"Great value for the price. Feels premium and well built.",ar:"قيمة ممتازة مقابل السعر. الخامة فاخرة والتصنيع متين."},
+  {en:"Fast delivery and the {cat} matched the description perfectly.",ar:"توصيل سريع و{cat} مطابق للوصف تماماً."},
+  {en:"Performance is even better than I expected. Very happy with it.",ar:"الأداء أفضل مما توقعت. سعيد جداً بالشراء."},
+  {en:"Best purchase I've made this year. Highly recommend.",ar:"أفضل عملية شراء هذا العام. أنصح به بشدة."},
+  {en:"Performance and build quality are excellent for this category.",ar:"الأداء وجودة التصنيع ممتازان في هذه الفئة."},
+  {en:"Bought it after comparing the specs here, no regrets at all.",ar:"اشتريته بعد مقارنة المواصفات هنا، ولا أندم إطلاقاً."},
+  {en:"Looks and feels far more expensive than it costs.",ar:"يبدو ويُحَسّ وكأنه أغلى بكثير من سعره."},
+  {en:"Does everything I expected and more. Five stars.",ar:"يؤدي كل ما توقعته وأكثر. خمس نجوم."}
+];
+const RV_MID=[
+  {en:"Good overall, though it took me a little while to get used to it.",ar:"جيد بشكل عام، لكنني احتجت بعض الوقت لأعتاد عليه."},
+  {en:"Solid for the price, but the packaging arrived slightly dented.",ar:"جيد مقابل السعر، لكن العبوة وصلت بها انبعاجة بسيطة."},
+  {en:"Works as described. Not perfect, but fair for what you pay.",ar:"يعمل كما هو موصوف. ليس مثالياً، لكنه عادل مقابل سعره."},
+  {en:"Decent {cat}. A few small things could be better, but I'd buy again.",ar:"{cat} لا بأس به. هناك تفاصيل صغيرة يمكن تحسينها، لكنني سأشتريه مجدداً."},
+  {en:"Met my expectations, nothing surprising. Does the job well.",ar:"لبّى توقعاتي دون مفاجآت. يؤدي الغرض جيداً."}
+];
+function rvPattern(r){ if(r>=4.7)return[5,5,4,5]; if(r>=4.4)return[5,4,5,4]; if(r>=4.1)return[5,4,5,3]; return[4,5,3,4]; }
+function starHTML(n){ return `<span class="rv-stars">${[1,2,3,4,5].map(i=>`<span class="${i<=n?'on':'off'}">&#9733;</span>`).join("")}</span>`; }
+function reviewsFor(p){
+  const lang=state.lang, count=3+(p.seq%2), pat=rvPattern(p.rating), cat=catLabel(p.cat).toLowerCase();
+  const out=[];
+  for(let i=0;i<count;i++){
+    const stars=pat[i];
+    const nm=RV_NAMES[(p.seq*7+i*5)%RV_NAMES.length][lang];
+    const dt=RV_DATES[(p.seq*3+i*4)%RV_DATES.length][lang];
+    const pool = stars>=5 ? RV_POS : RV_MID;
+    const idx = stars>=5 ? (p.seq*4+i*4)%RV_POS.length : (p.seq*3+i*4)%RV_MID.length;
+    const txt = pool[idx][lang].replace(/\{cat\}/g,cat);
+    out.push({name:nm,date:dt,stars,text:txt,verified:(i%3!==2),initial:nm.trim().charAt(0)});
+  }
+  return out;
+}
+function reviewBars(r){
+  const five=Math.min(90,Math.max(48,Math.round((r-3.4)*58))), rem=100-five;
+  const four=Math.round(rem*0.52), three=Math.round(rem*0.27), two=Math.round(rem*0.13);
+  const one=Math.max(0,100-five-four-three-two);
+  return [[5,five],[4,four],[3,three],[2,two],[1,one]];
+}
+function reviewsHTML(p){
+  const U=UIX[state.lang], revs=reviewsFor(p), total=40+(p.seq*37)%280;
+  return `<section class="reviews">
+    <h2>${U.reviewsTitle}</h2>
+    <div class="rv-summary">
+      <div class="rv-score">
+        <div class="rv-big num">${p.rating.toFixed(1)}</div>
+        ${starHTML(Math.round(p.rating))}
+        <div class="rv-count">${U.basedOn} <span class="num">${total}</span> ${U.reviewsWord}</div>
+      </div>
+      <div class="rv-bars">
+        ${reviewBars(p.rating).map(([s,pct])=>`<div class="rv-bar"><span class="rv-bl"><span class="num">${s}</span>&#9733;</span><span class="rv-track"><span class="rv-fill" style="width:${pct}%"></span></span><span class="rv-bp num">${pct}%</span></div>`).join("")}
+      </div>
+    </div>
+    <div class="rv-list">
+      ${revs.map(rv=>`<div class="rv-card">
+        <div class="rv-ava">${rv.initial}</div>
+        <div class="rv-main">
+          <div class="rv-top"><b>${rv.name}</b>${rv.verified?`<span class="rv-vf">&#10003; ${U.verified}</span>`:''}<span class="rv-date">${rv.date}</span></div>
+          ${starHTML(rv.stars)}
+          <p class="rv-text">${rv.text}</p>
+        </div></div>`).join("")}
+    </div>
+    <div class="rv-foot">
+      <button class="btn-ghost rv-write" onclick="reviewDemo()">${U.writeReview}</button>
+      <span class="rv-note">${U.reviewDemo}</span>
+    </div>
+  </section>`;
+}
+function reviewDemo(){ toast(UIX[state.lang].reviewDemo); }
 
 /* navigate helper */
 function openProduct(id){ location.hash = "#/product/"+id; }
@@ -1162,6 +1285,7 @@ function renderDetail(id){
         </div>
       </div>
     </div>
+    ${reviewsHTML(p)}
     ${related.length?`<div class="related"><h2>${U.related}</h2><div class="grid">${related.map(miniCard).join("")}</div></div>`:''}`;
 }
 
