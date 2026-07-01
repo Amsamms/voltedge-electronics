@@ -1600,10 +1600,11 @@ document.addEventListener("keydown",e=>{
 /* =================== CHAT ASSISTANT =================== */
 /* Calls Mistral AI directly from the browser (no backend), same pattern as
    amsamms.github.io/web_apps. NOTE: the key below is visible in page source. */
-const MISTRAL_KEY   = "mnmKw0OPPoClTcjqaOpJDGO4ZLJLH93M";
-const MISTRAL_URL   = "https://api.mistral.ai/v1/chat/completions";
+// Chat calls go through a Vercel serverless proxy that holds the Mistral
+// API key server-side (it never ships to the browser). See landing-page-chat-proxy.
+const MISTRAL_URL   = "https://landing-page-chat-proxy.vercel.app/api/chat";
 const MISTRAL_MODEL = "mistral-small-latest";   // capable + cheap, clean formatting
-const BOT_READY = !!MISTRAL_KEY;
+const BOT_READY = true;
 
 /* persona + strict formatting rules for professional, well-structured replies */
 function chatSystemPrompt(){
@@ -1748,7 +1749,7 @@ async function sendChat(){
     const messages=[{role:"system",content:chatSystemPrompt()},...chatHist.slice(-10)];
     const r=await fetch(MISTRAL_URL,{
       method:"POST",
-      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+MISTRAL_KEY },
+      headers:{ "Content-Type":"application/json" },
       body:JSON.stringify({ model:MISTRAL_MODEL, messages, temperature:0.2, max_tokens:500 })
     });
     const data=await r.json().catch(()=>({}));
